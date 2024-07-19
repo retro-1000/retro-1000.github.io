@@ -18,7 +18,7 @@
         <table align="center" padding="0">
             <tr><td valign="bottom"><img src="images/samsung_logo.png"></td><td style="font-family: 'Trebuchet MS'; font-size: 2.6rem; text-shadow: 4px 4px 5px gray; line-height: 1.2">&nbsp;SPC-1000&nbsp;<a href="https://github.com/retro-1000/retro-1000.github.io/issues">개선요청</a></td><td><img src="images/spc-1000.jpg"></td></tr>
         </table>
-        <div align="center"><span id='controls'><input type="button" value="🖭 로딩 SHIFT+F1" onclick="load();"> <input type="button" value="&#x1F3C3; RUN" onclick="RUN();"> <input type="button" value="이전 🖭 ALT + ⇦" onclick="tape_prev();"> <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> <input type="button" value="리셋 &#x27f3;" onclick="reset();"> <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()"></span></div>
+        <div align="center"><span id='controls'><input type="button" value="🖭 로딩 SHIFT+F1" onclick="LOAD();"> <input type="button" value="&#x1F3C3; RUN" onclick="RUN();"> <input type="button" value="이전 🖭 ALT + ⇦" onclick="tape_prev();"> <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> <input type="button" value="리셋 &#x27f3;" onclick="reset();"> <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()"></span></div>
         <div align="center">
             <drop_zone><canvas id="canvas" oncontextmenu="event.preventDefault()" allow="autoplay"></canvas></drop_zone>
         </div>
@@ -139,13 +139,17 @@
                     }
                 }
             });
+            function sleep(ms) {
+                const wakeUpTime = Date.now() + ms;
+                while (Date.now() < wakeUpTime) {}
+            }
             function reset() {
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
                 ['number'], // argument types
                 [0]); // arguments             
             };
-            function load() {
+            function LOAD() {
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
                 ['number'], // argument types
@@ -258,6 +262,9 @@
                 ['SHIFT', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'SHIFT'],
                 ['LOCK', 'SPACE']
             ];
+
+            let nkeys = [].concat(...normalKeys);
+            let skeys = [].concat(...shiftKeys);
             
             const offsets = [40,10,0,0,0,50]
         
@@ -377,7 +384,6 @@
                                     isCtrlToggled = false;
                                 }
                             }
-                            
                             setTimeout(() => {
                                 if (!pressedKey)
                                     handleReleseTouch();
@@ -423,10 +429,86 @@
             resizeCanvas();
         
             // 에뮬레이터로 키 입력을 전달하는 함수 (구현 필요)
-            function emulatorKeyPress(key) {
+            function emulatorKeyPress(key, shift) {
                 // SPC1000 에뮬레이터로 키 입력을 전달하는 로직
                 // console.log('Emulator key press:', key, isShiftToggled, isCtrlToggled, isGRPToggled, isLockToggled);
-                Module.ccall('keydown', 'null', ['string','boolean', 'boolean', 'boolean','boolean'], [key, isShiftToggled, isCtrlToggled, isGRPToggled, isLockToggled]);
+                Module.ccall('keydown', 'null', ['string','boolean', 'boolean', 'boolean','boolean','boolean'], [key, shift != null ? shift : isShiftToggled, isCtrlToggled, isGRPToggled, isLockToggled, shift != null]);
+            }
+            function emulatorTyping(cmd) {
+                let ms = 0;
+                cmd.split('').forEach((c) => {
+                    let uppercase = false;
+                    if (c == ' ')
+                        c = 'SPACE'
+                    else if (c == '\n')
+                        c = 'RETURN'
+                    if (c >= 'a' && c <= 'z') {
+                        c = c.toUpperCase()
+                    } else
+                        uppercase = true 
+                    if (!uppercase && nkeys.indexOf(c)) {
+                        setTimeout(() => emulatorKeyPress(c, false), ms += 30);
+                        // ms += 100;
+//                        setTimeout(() => emulatorKeyPress(null), ms += 30);
+                    } else if (skeys.indexOf(c)) {
+                        c = nkeys[skeys.indexOf(c)]
+                        setTimeout(() => emulatorKeyPress(c, true), ms += 30);
+                        // ms += 100;
+//                        setTimeout(() => emulatorKeyPress(null), ms += 20);
+                    }
+//                    ms += 100;
+                });
+            }
+            function GetURLParameter(sParam)
+            {
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++) 
+                {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam) 
+                    {
+                        return sParameterName[1];
+                    }
+                }
+            }
+            function isHex(h) {
+                var a = parseInt(h,16);
+                return (a.toString(16) ===h.toLowerCase())
+            }
+            const tape = GetURLParameter('tape');
+            const load = GetURLParameter('load');
+            const exec = GetURLParameter('exec');
+            Module['onRuntimeInitialized'] = function() {
+                console.log("wasm loaded ");
+                if (tape) {
+                    var req = new XMLHttpRequest();
+                    req.onload = function(){
+                        var data = this.responseText;
+                        let ms = data.length/150
+                        console.log(data.length, tape, ms)
+                        setTimeout(() => tape_load(data, data.length, tape), ms);
+                        setTimeout(() => LOAD(), ms += 2000);
+                        if (load) {
+                            load.split(';').forEach((cmd) => {
+                                if (cmd == 'F6')
+                                    setTimeout(() => LOAD(), ms += 2000);
+                            });
+                        }
+                        console.log(exec, ms)
+                        if (exec == null || exec.toUpperCase() == 'RUN')
+                        {
+                            setTimeout(() => RUN(), ms + 2000);
+                            return;
+                        } else if (isHex(exec)) 
+                            cmd = `call &h${exec}`;
+                        else
+                            cmd = exec;
+                        setTimeout(() => emulatorTyping(cmd+'\n'), ms += 2000);
+                    };
+                    req.open('GET', `./taps/${tape}`);
+                    req.send();                
+                }
             }
         </script>
         <script src="index.js"></script>
