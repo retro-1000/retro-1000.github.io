@@ -12,6 +12,10 @@
                 border: 1px solid #999;
                 box-shadow: 0 0 10px rgba(0,0,0,0.1);
             }
+            .img-concert {
+                width: 240px;
+                height: 180px;
+            }
         </style>
     </head>
     <body>
@@ -33,12 +37,17 @@
                   <td><a href="http://hits.dwyl.com/spc-1000/spc-1000githubio" target="_blank">
                     <img src="https://hits.dwyl.com/spc-1000/spc-1000githubio.svg?style=flat&show=unique"></a></td>
                   <td><button id="screenshot" type="button"> &#x2399; 화면캡처</button></td>
+                  <!-- <td><a href="javascript:tape_loading('sharkkiller.tap');">상어잡이</a></td> -->
                   </tr></table>
             </span>
         </div>    
         <div align="center">
             <canvas id="keyboardCanvas" oncontextmenu="event.preventDefault()"></canvas></div>
-        </div>      
+        </div> 
+        <div align="center"><a href="javascript:tape_loading('lode_runner1-mayhouse.tap');"><img class="img-concert" src="images/spc-1000_240720_0.png" /></a>
+            <a href="javascript:tape_loading('ASTEROID%20BELT.tap','F6');"><img class="img-concert" src="images/spc-1000_240720_1.png" /></a>
+            <a href="javascript:tape_loading('Xevious.cas');"><img class="img-concert" src="images/spc-1000_240720_2.png" /></a>
+        </div>     
         <script type='text/javascript'>
             var Module = {
                 canvas: (function() { return document.getElementById('canvas'); })()
@@ -115,18 +124,7 @@
                       const file = await handle.getFile();
                       if (filename.toLowerCase().includes('.cas'))
                       {
-                        const adata = new Uint8Array(await file.arrayBuffer());
-                        const length = adata.byteLength;
-                        console.log(length, adata);
-                        let ndata = "";
-                        for (i = 0x10; i < length; i++)
-                        {
-                            for(j = 0; j < 8; j++)
-                                if (adata[i]&(0x80>>j))
-                                    ndata += '1';
-                                else
-                                    ndata += '0';
-                        }
+                        ndata = cas2tap(new Uint8Array(await file.arrayBuffer()))
                         tape_load(ndata, ndata.length, filename);
                       }
                       else
@@ -139,6 +137,21 @@
                     }
                 }
             });
+            function cas2tap(data) {
+                const adata = data;
+                const length = adata.byteLength;
+                //console.log(length, adata);
+                let ndata = "";
+                for (i = 0x10; i < length; i++)
+                {
+                    for(j = 0; j < 8; j++)
+                        if (adata[i]&(0x80>>j))
+                            ndata += '1';
+                        else
+                            ndata += '0';
+                }
+                return ndata                
+            }
             function sleep(ms) {
                 const wakeUpTime = Date.now() + ms;
                 while (Date.now() < wakeUpTime) {}
@@ -239,11 +252,11 @@
             String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
             Number.prototype.zf = function (len) { return this.toString().zf(len); };  
 
-            const canvas = document.getElementById('keyboardCanvas');
-            const ctx = canvas.getContext('2d');
+            const kcanvas = document.getElementById('keyboardCanvas');
+            const ctx = kcanvas.getContext('2d');
         
-            canvas.width = window.innerWidth * 0.95
-            canvas.height = window.innerHeight / 2;
+            kcanvas.width = window.innerWidth * 0.95
+            kcanvas.height = window.innerHeight / 2;
         
             const normalKeys = [
                 ['F1', 'F2', 'F3', 'F4', 'F5', ' ', 'HOME', '←', '→', '↑', '↓'],
@@ -279,8 +292,8 @@
             const keyClickSound = new Audio('typing.wav'); // 키 클릭 사운드 파일 경로를 지정하세요
         
             function calculateKeySize() {
-                keyWidth = (canvas.width) / 15.5;
-                keyHeight = canvas.height / 6;
+                keyWidth = (kcanvas.width) / 15.5;
+                keyHeight = kcanvas.height / 6;
             }
         
             function drawKey(x, y, width, height, key, isToggled = false) {
@@ -315,7 +328,7 @@
             }
         
             function drawKeyboard() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(0, 0, kcanvas.width, kcanvas.height);
                 
                 const keys = isShiftToggled ? shiftKeys : normalKeys;
                 
@@ -339,7 +352,7 @@
         
             function handleTouch(e) {
                 e.preventDefault();
-                const rect = canvas.getBoundingClientRect();
+                const rect = kcanvas.getBoundingClientRect();
                 const x = e.touches ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
                 const y = e.touches ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
                 
@@ -396,9 +409,9 @@
                 }
             }
         
-            canvas.addEventListener('touchstart', handleTouch);
-            canvas.addEventListener('touchend', handleReleseTouch);
-            canvas.addEventListener('mousedown', function(e) {
+            kcanvas.addEventListener('touchstart', handleTouch);
+            kcanvas.addEventListener('touchend', handleReleseTouch);
+            kcanvas.addEventListener('mousedown', function(e) {
                 // 마우스 이벤트를 터치 이벤트로 변환
                 const touch = {
                     clientX: e.clientX,
@@ -406,7 +419,7 @@
                 };
                 handleTouch({touches: [touch], preventDefault: function() {}});
             });
-            canvas.addEventListener('mouseup', handleReleseTouch);
+            kcanvas.addEventListener('mouseup', handleReleseTouch);
 
             function handleReleseTouch() {
                 pressedkey = null;
@@ -418,8 +431,8 @@
             }
             
             function resizeCanvas() {
-                canvas.width = window.innerWidth * 0.96;
-                canvas.height = window.innerHeight / 4;
+                kcanvas.width = window.innerWidth * 0.96;
+                kcanvas.height = window.innerHeight / 4;
                 calculateKeySize();
                 drawKeyboard();
             }
@@ -476,22 +489,31 @@
                 var a = parseInt(h,16);
                 return (a.toString(16) ===h.toLowerCase())
             }
-            const tape = GetURLParameter('tape');
-            const load = GetURLParameter('load');
-            const exec = GetURLParameter('exec');
-            Module['onRuntimeInitialized'] = function() {
-                console.log("wasm loaded ");
+            Module['onRuntimeInitialized'] = prepare_tape_loading;
+            function prepare_tape_loading()
+            {
+                const tape = GetURLParameter('tape');
+                const load = GetURLParameter('load');
+                const exec = GetURLParameter('exec');
+                tape_loading(tape, load, exec)
+            }
+            function tape_loading(tape, load, exec) {
                 if (tape) {
                     var req = new XMLHttpRequest();
+                    var cas = tape.toLowerCase().includes('.cas')
                     req.onload = function(){
-                        var data = this.responseText;
-                        let ms = data.length/150
+                        var data = cas ? new Uint8Array(this.response) : this.responseText;
                         if (this.status == 404) {
                             console.log('404 error')
                             return;
                         }
-                        console.log(data.length, tape, ms)
                         title = tape.replace('%20', ' ')
+                        let ms = data.length/150
+                        console.log(data.length, tape, ms)
+                        if (cas)
+                            data = cas2tap(data)
+                        ms = data.length/150
+                        console.log(data.length, tape, ms)
                         setTimeout(() => tape_load(data, data.length, title), ms);
                         setTimeout(() => LOAD(), ms += 2000);
                         if (load) {
@@ -512,6 +534,8 @@
                         setTimeout(() => emulatorTyping(cmd+'\n'), ms += 2000);
                     };
                     req.open('GET', `./taps/${tape}`);
+                    if (cas)
+                        req.responseType = "arraybuffer";
                     req.send();                
                 }
             }
