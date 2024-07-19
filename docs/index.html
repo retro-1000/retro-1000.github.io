@@ -486,6 +486,10 @@
                     req.onload = function(){
                         var data = this.responseText;
                         let ms = data.length/150
+                        if (this.status == 404) {
+                            console.log('404 error')
+                            return;
+                        }
                         console.log(data.length, tape, ms)
                         title = tape.replace('%20', ' ')
                         setTimeout(() => tape_load(data, data.length, title), ms);
