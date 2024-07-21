@@ -22,7 +22,7 @@
         <table align="center" padding="0">
             <tr><td valign="bottom"><img src="images/samsung_logo.png"></td><td style="font-family: 'Trebuchet MS'; font-size: 2.6rem; text-shadow: 4px 4px 5px gray; line-height: 1.2">&nbsp;SPC-1000&nbsp;<a href="https://github.com/retro-1000/retro-1000.github.io/issues">개선요청</a></td><td><img src="images/spc-1000.jpg"></td></tr>
         </table>
-        <div align="center"><span id='controls'><input type="button" value="🖭 로딩 SHIFT+F1" onclick="LOAD();"> <input type="button" value="&#x1F3C3; RUN" onclick="RUN();"> <input type="button" value="이전 🖭 ALT + ⇦" onclick="tape_prev();"> <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> <input type="button" value="리셋 &#x27f3;" onclick="reset();"> <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()"></span></div>
+        <div align="center"><span id='controls'><input type="button" value="🖭 로딩 SHIFT+F1" onclick="LOAD();"> <input type="button" value="&#x1F3C3; RUN" onclick="RUN();"> <input type="button" value="이전 🖭 ALT + ⇦" onclick="tape_prev();"> <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> <input type="button" value="리셋 &#x27f3;" onclick="RESET(1);"> <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()"></span></div>
         <div align="center">
             <drop_zone><canvas id="canvas" oncontextmenu="event.preventDefault()" allow="autoplay"></canvas></drop_zone>
         </div>
@@ -53,14 +53,33 @@
             var Module = {
                 canvas: (function() { return document.getElementById('canvas'); })()
             };
+            function getCanvasBlob(canvas) {
+                return new Promise(function(resolve, reject) {
+                    canvas.toBlob(function(blob) {
+                        resolve(blob)
+                    })
+                })
+            }
             const elem1 = document.querySelector('#screenshot');
             var screen_num = 0;
+            var tapename = null;
             elem1.addEventListener('click', () => {
-              canvas.toBlob((blob) => {
-                var date = new Date().format('yyMMdd');
-                saveBlob(blob, `spc-1000_${date}_${screen_num}.png`);
-                screen_num += 1;
-              });
+                var canvasblob = getCanvasBlob(canvas);
+                canvasblob.then(function(blob) {
+                    var date = new Date().format('yyMMdd');
+                    if (tapename != null)
+                        if (screen_num > 0)
+                            screenshotfile = `${tapename}_${screen_num}.png` 
+                        else
+                            screenshotfile = `${tapename}.png`
+                    else
+                        screenshotfile =  `spc-1000_${date}_${screen_num}.png`
+                    console.log(tapename);
+                    saveBlob(blob, screenshotfile);
+                    screen_num += 1;
+                }, function(err) {
+                    console.log(err)
+                });
             });
             const saveBlob = (function() {
               const a = document.createElement('a');
@@ -73,6 +92,7 @@
                  a.click();
               };
             }());
+            var reset_required = false;
             const input = document.querySelector("#upload");
             input.addEventListener('change', upload_file);
             const supportsFileSystemAccessAPI =
@@ -157,11 +177,14 @@
                 const wakeUpTime = Date.now() + ms;
                 while (Date.now() < wakeUpTime) {}
             }
-            function reset() {
-                var result = Module.ccall('remote', // name of C function
-                'number', // return type
-                ['number'], // argument types
-                [0]); // arguments             
+            function RESET(force) {
+                if (reset_required || force) {
+                    tapename = Module.ccall('remote', // name of C function
+                    'number', // return type
+                    ['number'], // argument types
+                    [0]); // arguments
+                    reset_required = false;
+                }
             };
             function LOAD() {
                 var result = Module.ccall('remote', // name of C function
@@ -173,27 +196,42 @@
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
                 ['number'], // argument types
-                [2]); // arguments             
-            };           
+                [2]); // arguments  
+                reset_required = true;           
+            };          
             function tape_prev() {
-                var result = Module.ccall('remote', // name of C function
-                'number', // return type
+                var result  = Module.ccall('remote', // name of C function
+                'string', // return type
                 ['number'], // argument types
-                [3]); // arguments             
+                [3]); // arguments  
+                tapename = result;
+                screen_num = 0;
             }; 
             function tape_next() {
-                var result = Module.ccall('remote', // name of C function
-                'number', // return type
+                var result  = Module.ccall('remote', // name of C function
+                'string', // return type
                 ['number'], // argument types
                 [4]); // arguments             
+                tapename = result;
+                screen_num = 0;
             };                       
             async function tape_load(data, length, filename) {
                 <!-- console.log(data, length, filename); -->
+                RESET();
+                var result  = Module.ccall('remote', // name of C function
+                'string', // return type
+                ['number', 'number', 'string', 'string'], // argument types
+                [6, length, data, filename]); // arguments  
+                console.log(result);
+                tapename = result;
+                screen_num = 0;
+            };
+            function TURBO_OFF() {
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
-                ['number', 'number', 'string', 'string'], // argument types
-                [6, length, data, filename]); // arguments             
-            };
+                ['number','number'], // argument types
+                [7,0]); // arguments                  
+            } 
             async function upload_file() {
                 const curFiles = input.files;
                 for (const file of curFiles) {
@@ -450,6 +488,7 @@
             }
             function emulatorTyping(cmd) {
                 let ms = 0;
+                TURBO_OFF();
                 cmd.split('').forEach((c) => {
                     let uppercase = false;
                     if (c == ' ')
@@ -458,17 +497,20 @@
                         c = 'RETURN'
                     if (c >= 'a' && c <= 'z') {
                         c = c.toUpperCase()
-                    } else
-                        uppercase = true 
-                    if (!uppercase && nkeys.indexOf(c)) {
-                        setTimeout(() => emulatorKeyPress(c, false), ms += 30);
+                    } else if (c >= 'A' && c <= 'Z') 
+                        uppercase = true;
+//                    console.log(c, uppercase, nkeys.indexOf(c), skeys.indexOf(c))
+                    if (!uppercase && nkeys.indexOf(c)>=0) {
+                        setTimeout(() => emulatorKeyPress(c, false), ms += 50);
                         // ms += 100;
 //                        setTimeout(() => emulatorKeyPress(null), ms += 30);
-                    } else if (skeys.indexOf(c)) {
+                    } else if (skeys.indexOf(c)>=0) {
                         c = nkeys[skeys.indexOf(c)]
-                        setTimeout(() => emulatorKeyPress(c, true), ms += 30);
+                        setTimeout(() => emulatorKeyPress(c, true), ms += 50);
                         // ms += 100;
 //                        setTimeout(() => emulatorKeyPress(null), ms += 20);
+                    } else {
+                        console.log('error:',c)
                     }
 //                    ms += 100;
                 });
@@ -508,7 +550,7 @@
                             console.log('404 error')
                             return;
                         }
-                        title = tape.replace('%20', ' ')
+                        title = decodeURIComponent(tape)
                         let ms = data.length/150
                         console.log(data.length, tape, ms)
                         if (cas)
@@ -528,8 +570,10 @@
                         {
                             setTimeout(() => RUN(), ms + 2000);
                             return;
-                        } else if (isHex(exec)) 
-                            cmd = `call &h${exec}`;
+                        } else if (exec == '')
+                            return;
+                        else if (isHex(exec)) 
+                            cmd = `call&h${exec}`;
                         else
                             cmd = exec;
                         setTimeout(() => emulatorTyping(cmd+'\n'), ms += 2000);
