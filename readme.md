@@ -16,6 +16,6 @@
 **설명**: 사과를 훔치려는 도둑 외계인에 맞써 사과를 지키는 사과군이 됩시다.
 
 ### 상어잡이
-![image](https://github.com/user-attachments/assets/009c2d0a-69eb-41a3-b26b-093dee56dbe2)
+[![image](https://github.com/user-attachments/assets/009c2d0a-69eb-41a3-b26b-093dee56dbe2)](https://retro-1000.github.io?tape=sharkkiller.tap)
 
 **설명**: 바다를 헤엄쳐 상어를 잡으러 갑니다.
