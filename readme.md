@@ -11,7 +11,7 @@
 ## 게임
 
 ### 사과도둑
-[![image](https://github.com/user-attachments/assets/649d7d58-e8e7-4736-adc2-0692b646a0e2)](https://retro-1000.github.io?tape=APPLE&nbsp;THIEF.tap)
+[![image](https://github.com/user-attachments/assets/649d7d58-e8e7-4736-adc2-0692b646a0e2)](https://retro-1000.github.io?tape=APPLE%20THIEF.tap)
 
 **설명**: 사과를 훔치려는 도둑 외계인에 맞써 사과를 지키는 사과군이 됩시다.
 
