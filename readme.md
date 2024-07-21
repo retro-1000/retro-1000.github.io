@@ -118,6 +118,12 @@
 
 *설명* 키보드로 음악을 연주한다
 
+### 캉가루 ([심마니]kangaroo.tap)
+
+[![image](https://retro-1000.github.io/images/%5B%EC%8B%AC%EB%A7%88%EB%8B%88%5Dkangaroo.tap.png)](https://retro-1000.github.io?tape=%5B%EC%8B%AC%EB%A7%88%EB%8B%88%5Dkangaroo.tap)
+
+*설명* 엄청난 점프력의 캉가루, 우리친구 캉가루는 햄버거를 먹기 위해 죽기살기로 내달린다.
+
 
 ## 프로그래밍
 
