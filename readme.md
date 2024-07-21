@@ -12,13 +12,13 @@
 
 ### 사과도둑
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=APPLE%20THIEF.tap)
+[![image](https://retro-1000.github.io/images/APPLE%20THIEF.tap.png)](https://retro-1000.github.io?tape=APPLE%20THIEF.tap)
 
 *설명* 사과를 훔치려는 도둑 외계인에 맞써 사과를 지키는 사과군이 됩시다. 적의 무기는 피하고 외계인이나 우주선을 맞추면 점수가 올라갑니다.
 
 ### 상어잡이
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=sharkkiller.tap)
+[![image](https://retro-1000.github.io/images/sharkkiller.tap.png)](https://retro-1000.github.io?tape=sharkkiller.tap)
 
 *설명* 바다를 헤엄쳐 상어를 잡으러 갑니다. 해파리를 잡으면 다양한 점수가 나오고, 상어를 잡으면 50점이 제공됩니다.
 
@@ -42,7 +42,7 @@
 
 ### 어드밴쳐
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=ADVENTURE.tap)
+[![image](https://retro-1000.github.io/images/ADVENTURE.tap.png)](https://retro-1000.github.io?tape=ADVENTURE.tap)
 
 *설명* 자세한 설명은 생략한다
 
@@ -102,7 +102,7 @@
 
 ### 벽돌깨기
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=%5Bsim%5Dblock.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=%5Bsim%5Dblock.tap)
 
 *설명* 벽돌깨기 게임이다.
 
@@ -123,7 +123,7 @@
 
 ### 어셈블러
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=Assembler.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=Assembler.tap)
 
 *설명* 1983년8월1일에 발매된 어셈블러이다. 어셈블러는 매우 중요했던 프로그래밍 도구였으나 이를 보유하고 있는 이가 매우 드물었다
 
@@ -141,25 +141,25 @@
 
 ### 재배치1_1
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=RELOCATER%201_1.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=RELOCATER%201_1.tap)
 
 *설명* 자세한 설명은 생략한다
 
 ### 재배치(2)
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=RELOCATER%282%29.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=RELOCATER%282%29.tap)
 
 *설명* 자세한 설명은 생략한다
 
 ### 재배치
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=RELOCATER.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=RELOCATER.tap)
 
 *설명* 자세한 설명은 생략한다
 
 ### 신텍스모니터
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=Styx%20Monitor.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=Styx%20Monitor.tap)
 
 *설명* 기계어 모니터 프로그램으로 보인다.
 
@@ -186,13 +186,13 @@
 
 ### LED도트디자이너1
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=LED1.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=LED1.tap)
 
 *설명* LED 도트 디자이너. 점을 찍어 그림을 완성하자. LED와 동일한 것으로 보인다
 
 ### 모스부호(2)
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=MORSE%282%29.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=MORSE%282%29.tap)
 
 *설명* 자세한 설명은 생략한다
 
@@ -207,13 +207,13 @@
 
 ### 미분류 파일
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=DASM%20%26%20RLCT.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=DASM%20%26%20RLCT.tap)
 
 *설명* 자세한 설명은 생략한다
 
 ### 미분류 파일
 
-[![image](https://retro-1000.github.io/images/no_screentshot.png)](https://retro-1000.github.io?tape=GRAPHIC%20EDITOR%20D.tap)
+[![image](https://retro-1000.github.io/images/no_screenshot.png)](https://retro-1000.github.io?tape=GRAPHIC%20EDITOR%20D.tap)
 
 *설명* 자세한 설명은 생략한다
 
