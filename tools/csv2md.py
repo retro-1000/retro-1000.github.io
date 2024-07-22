@@ -8,7 +8,7 @@ file = 'SPC1000_program_collection.csv'
 
 if not os.path.exists(file):
     os.exit()
-a = pd.read_csv(file, encoding='euc-kr', dtype={'실행': str, '설명': str})
+a = pd.read_csv(file, encoding='euc-kr', dtype={'실행': str, '설명': str}, encoding_errors='ignore')
 
 if '-html' in sys.argv:
     orig_stdout = sys.stdout
