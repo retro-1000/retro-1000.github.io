@@ -560,6 +560,7 @@
             }
             Module['onRuntimeInitialized'] = prepare_tape_loading;
             var first_initialized = true
+            var prev_tape = null;
             function prepare_tape_loading()
             {
                 const tape = GetURLParameter('tape');
@@ -571,7 +572,7 @@
                 }
             }
             function tape_loading(tape, load, exec) {
-                if (tape) {
+                if (tape != prev_tape) {
                     var req = new XMLHttpRequest();
                     var cas = tape.toLowerCase().includes('.cas')
                     req.onload = function(){
@@ -611,7 +612,8 @@
                     req.open('GET', `./taps/${tape}`);
                     if (cas)
                         req.responseType = "arraybuffer";
-                    req.send();                
+                    req.send(); 
+                    prev_tape = tape;               
                 }
             }
         </script>
