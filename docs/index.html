@@ -261,6 +261,18 @@
                     }
                 }                
             }
+            // document.addEventListener("paste", (event) => {
+            //     event.preventDefault();
+            //     let paste = (event.clipboardData || window.clipboardData).getData("text");
+            //     console.log(paste)
+            //     emulatorTyping(paste, false);
+            //     // paste = paste.toUpperCase();
+            //     // const selection = window.getSelection();
+            //     // if (!selection.rangeCount) return;
+            //     // selection.deleteFromDocument();
+            //     // selection.getRangeAt(0).insertNode(document.createTextNode(paste));
+            //     // selection.collapseToEnd(); 
+            // });
             Date.prototype.format = function (f) {
                 if (!this.valueOf()) return " ";
                 var weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
@@ -315,13 +327,13 @@
                 document.getElementById('showkeyboard').style.display = 'block';
             }
         
-            kcanvas.width = window.innerWidth * 0.95
+            kcanvas.width = window.innerWidth
             kcanvas.height = window.innerHeight / 2;
         
             const normalKeys = [
                 ['F1', 'F2', 'F3', 'F4', 'F5', ' ', 'HOME', '←', '→', '↑', '↓'],
-                ['ESC', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '^', '\\', 'BREAK'],
-                ['TAB', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '[',  'DEL', 'GRP'],
+                ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '^', '\\', 'BREAK'],
+                ['ESC', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '[',  'DEL', 'GRP'],
                 ['CTRL', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', ":", ']', 'RETURN'],
                 ['SHIFT', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'SHIFT'],
                 ['LOCK', 'SPACE']
@@ -329,8 +341,8 @@
         
             const shiftKeys = [
                 ['F1', 'F2', 'F3', 'F4', 'F5', ' ', 'CLS', '←', '→', '↑', '↓'],
-                ['ESC', '!', '"', '#', '$', '%', '&', "'", '(', ')', '0', '=', '~', '\\', 'BREAK'],
-                ['TAB', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '{', 'INS', 'GRP'],
+                ['!', '"', '#', '$', '%', '&', "'", '(', ')', '0', '=', '~', '\\', 'BREAK'],
+                ['ESC', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '{', 'INS', 'GRP'],
                 ['CTRL', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '+', '*', '}', 'RETURN'],
                 ['SHIFT', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'SHIFT'],
                 ['LOCK', 'SPACE']
@@ -339,7 +351,7 @@
             let nkeys = [].concat(...normalKeys);
             let skeys = [].concat(...shiftKeys);
             
-            const offsets = [40,10,0,0,0,50]
+            const offsets = [40,40,0,0,0,90]
         
             let keyWidth, keyHeight;
             let isShiftToggled = false;
@@ -352,7 +364,7 @@
             const keyClickSound = new Audio('typing.wav'); // 키 클릭 사운드 파일 경로를 지정하세요
         
             function calculateKeySize() {
-                keyWidth = (kcanvas.width) / 15.5;
+                keyWidth = (kcanvas.width) / 15;
                 keyHeight = kcanvas.height / 6;
             }
         
@@ -381,7 +393,7 @@
                 ctx.stroke();
         
                 ctx.fillStyle = specialKeys.includes(key) ? '#ffffff' : '#333333';
-                ctx.font = '14px Arial';
+                ctx.font = 'bold 16px Arial';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText(key, x + width / 2, y + height / 2, width * 0.8);
@@ -399,8 +411,7 @@
                         let height = keyHeight;
                         
                         if (key === 'SPACE') width = keyWidth * 10;
-                        else if (['F1','F2', 'F3', 'F4', 'F5', 'TAB', 'LOCK', 'RETURN'].includes(key)) width = keyWidth * 1.5;
-                        else if (key == 'CTRL') width = keyWidth * 1.7;
+                        else if (['F1','F2', 'F3', 'F4', 'F5', 'CTRL', 'TAB', 'LOCK', 'RETURN'].includes(key)) width = keyWidth * 1.5;
                         else if (key == 'SHIFT') width = keyWidth * 2;
                         
                         if (key != ' ')
@@ -440,8 +451,6 @@
                             
                             if (key === 'SHIFT') {
                                 isShiftToggled = !isShiftToggled;
-                            } else if (key === 'LOCK') {
-                                isLockToggled = !isLockToggled;
                             } else if (key === 'CTRL') {
                                 isCtrlToggled = !isCtrlToggled;
                             } else if (key === 'GRP') {
@@ -507,9 +516,11 @@
                 // console.log('Emulator key press:', key, isShiftToggled, isCtrlToggled, isGRPToggled, isLockToggled);
                 Module.ccall('keydown', 'null', ['string','boolean', 'boolean', 'boolean','boolean','boolean'], [key, shift != null ? shift : isShiftToggled, isCtrlToggled, isGRPToggled, isLockToggled, shift != null]);
             }
-            function emulatorTyping(cmd) {
+            function emulatorTyping(cmd, turbooff=true) {
                 let ms = 0;
-                TURBO_OFF();
+                if (turbooff)
+                    TURBO_OFF();
+                emulatorKeyPress(null);
                 cmd.split('').forEach((c) => {
                     let uppercase = false;
                     if (c == ' ')
@@ -520,20 +531,14 @@
                         c = c.toUpperCase()
                     } else if (c >= 'A' && c <= 'Z') 
                         uppercase = true;
-//                    console.log(c, uppercase, nkeys.indexOf(c), skeys.indexOf(c))
                     if (!uppercase && nkeys.indexOf(c)>=0) {
                         setTimeout(() => emulatorKeyPress(c, false), ms += 50);
-                        // ms += 100;
-//                        setTimeout(() => emulatorKeyPress(null), ms += 30);
                     } else if (skeys.indexOf(c)>=0) {
                         c = nkeys[skeys.indexOf(c)]
                         setTimeout(() => emulatorKeyPress(c, true), ms += 50);
-                        // ms += 100;
-//                        setTimeout(() => emulatorKeyPress(null), ms += 20);
                     } else {
                         console.log('error:',c)
                     }
-//                    ms += 100;
                 });
             }
             function GetURLParameter(sParam)
