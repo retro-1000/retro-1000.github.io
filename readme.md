@@ -34,7 +34,7 @@
 |캉가루|<a href="https://retro-1000.github.io?tape=kangaroo.tap"><img src="https://retro-1000.github.io/images/kangaroo.tap.png"></a>|**[kangaroo.tap](https://retro-1000.github.io/taps/kangaroo.tap)**<br>엄청난 점프력의 캉가루, 우리친구 캉가루는 햄버거를 먹기 위해 죽기살기로 내달린다.|
 |투탄카멘|<a href="https://retro-1000.github.io?tape=TUTANCANMEN.cas"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[TUTANCANMEN.cas](https://retro-1000.github.io/taps/TUTANCANMEN.cas)**<br>시간 안에 열쇠를 찾아 미로를 탈출하는 미로게임. 시간이 흐를 수록 적들이 늘어 난다. 쉽게 끝낼 수 있을것 같지만 시간을 너무 조금 줬다. (오월의집)|
 |플래피|<a href="https://retro-1000.github.io?tape=Flappy.cas"><img src="https://retro-1000.github.io/images/Flappy.cas.png"></a>|**[Flappy.cas](https://retro-1000.github.io/taps/Flappy.cas)**<br>MSX 플래피게임중 카세트버전을 컨버전한 게임 (오월의집)|
-|㈋쩜じ|<a href="https://retro-1000.github.io?tape=Jet%20set%20willy.cas"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[Jet set willy.cas](https://retro-1000.github.io/taps/Jet%20set%20willy.cas)**<br>유럽 애들은 방마다 돌아 다니면서 온갖 잡동사니 수집하는데 열광한다. 다른 기종에서도 자주 보이는 게임이다 (오월의집)|
+|젯셋윌리|<a href="https://retro-1000.github.io?tape=Jet%20set%20willy.cas"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[Jet set willy.cas](https://retro-1000.github.io/taps/Jet%20set%20willy.cas)**<br>유럽 애들은 방마다 돌아 다니면서 온갖 잡동사니 수집하는데 열광한다. 다른 기종에서도 자주 보이는 게임이다 (오월의집)|
 |메비우스|<a href="https://retro-1000.github.io?tape=Mevious%20%28198x%29%20%28-%29.cas"><img src="https://retro-1000.github.io/images/Mevious%20%28198x%29%20%28-%29.cas.png"></a>|**[Mevious (198x) (-).cas](https://retro-1000.github.io/taps/Mevious%20%28198x%29%20%28-%29.cas)**<br>오델로게임. 화면 움직임이 상당히 부드럽고 고급스러운것이 특징이나 오히려 너무 부드럽다보니 말 놓는 자리 선택이 너무 느려졌다. (오월의집)|
 
 
