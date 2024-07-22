@@ -38,7 +38,7 @@ for group in groups:
         if not os.path.exists(f'../docs/taps/{filename}'):
             continue
         title = c.제목 if type(c.제목) != float else '미분류 파일'
-        comment = f'**{filename}**<br>' + (c.설명 if type(c.설명) != float else '자세한 설명은 생략한다')
+        comment = f'**[{filename}](https://retro-1000.github.io/taps/{filename})**<br>' + (c.설명 if type(c.설명) != float else '자세한 설명은 생략한다')
         imgfilename = f'{filename}.png'
         imgsize = ''
         if type(c.실행) != float:
