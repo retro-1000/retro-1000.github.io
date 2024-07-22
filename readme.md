@@ -36,6 +36,7 @@
 |플래피|<a href="https://retro-1000.github.io?tape=Flappy.cas"><img src="https://retro-1000.github.io/images/Flappy.cas.png"></a>|**[Flappy.cas](https://retro-1000.github.io/taps/Flappy.cas)**<br>MSX 플래피게임중 카세트버전을 컨버전한 게임 (오월의집)|
 |젯셋윌리|<a href="https://retro-1000.github.io?tape=Jet%20set%20willy.cas"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[Jet set willy.cas](https://retro-1000.github.io/taps/Jet%20set%20willy.cas)**<br>유럽 애들은 방마다 돌아 다니면서 온갖 잡동사니 수집하는데 열광한다. 다른 기종에서도 자주 보이는 게임이다 (오월의집)|
 |메비우스|<a href="https://retro-1000.github.io?tape=Mevious%20%28198x%29%20%28-%29.cas"><img src="https://retro-1000.github.io/images/Mevious%20%28198x%29%20%28-%29.cas.png"></a>|**[Mevious (198x) (-).cas](https://retro-1000.github.io/taps/Mevious%20%28198x%29%20%28-%29.cas)**<br>오델로게임. 화면 움직임이 상당히 부드럽고 고급스러운것이 특징이나 오히려 너무 부드럽다보니 말 놓는 자리 선택이 너무 느려졌다. (오월의집)|
+|톰과제리|<a href="https://retro-1000.github.io?tape=Tom%20%26%20Jerry.cas"><img src="https://retro-1000.github.io/images/Tom%20%26%20Jerry.cas.png"></a>|**[Tom & Jerry.cas](https://retro-1000.github.io/taps/Tom%20%26%20Jerry.cas)**<br>SCREEN 0,0,2의 4색 컬러게임으로 생쥐 제리가 고양이 톰의 괴롭힘을 피해 치즈를 모으는 것이라고 하는데 알고보니 쥐가 고양이잡는 게임이었다. 톰이 때거리가 출현하면 어리버리 움직이다가 친구들이 다 죽고 두마리 남으면 갑자기 미친듯이 달려든다. 더군다나 못먹을줄 알았던 치즈까지 먹어대며 달려드는데 입에 거품물고 달려드는 고양이가 떠오를 지경이다. PC-6001의 "Cheese world"가 있고 동일하다. (오월의집)|
 
 
 ## 프로그래밍
@@ -61,6 +62,7 @@
 |LED도트디자이너1|<a href="https://retro-1000.github.io?tape=LED1.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[LED1.tap](https://retro-1000.github.io/taps/LED1.tap)**<br>LED 도트 디자이너. 점을 찍어 그림을 완성하자. LED와 동일한 것으로 보인다|
 |모스부호(2)|<a href="https://retro-1000.github.io?tape=MORSE%282%29.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[MORSE(2).tap](https://retro-1000.github.io/taps/MORSE%282%29.tap)**<br>자세한 설명은 생략한다|
 |모스부호|<a href="https://retro-1000.github.io?tape=MORSE.tap"><img src="https://retro-1000.github.io/images/MORSE.tap.png"></a>|**[MORSE.tap](https://retro-1000.github.io/taps/MORSE.tap)**<br>모르스부호를 생성한다.|
+|42칼럼|<a href="https://retro-1000.github.io?tape=42column.cas"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[42column.cas](https://retro-1000.github.io/taps/42column.cas)**<br>SPC-1000에서 42컬럼을 가능하게 하주는 속도빠른 프로그램 (오월의집)|
 
 
 ## 교육

@@ -19,3 +19,4 @@
 "C:/Program Files/Google/Chrome/Application/chrome.exe" http://localhost:8000?tape=Jet%20set%20willy.cas
 "C:/Program Files/Google/Chrome/Application/chrome.exe" http://localhost:8000?tape=Mevious%20%28198x%29%20%28-%29.cas
 "C:/Program Files/Google/Chrome/Application/chrome.exe" http://localhost:8000?tape=Flappy.cas
+"C:/Program Files/Google/Chrome/Application/chrome.exe" http://localhost:8000?tape=42column.cas
