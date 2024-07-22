@@ -37,14 +37,14 @@
                   <td><a href="http://hits.dwyl.com/spc-1000/spc-1000githubio" target="_blank">
                     <img src="https://hits.dwyl.com/spc-1000/spc-1000githubio.svg?style=flat&show=unique"></a></td>
                   <td><button id="screenshot" type="button"> &#x2399; 화면캡처</button></td>
-                  <!-- <td><a href="javascript:tape_loading('sharkkiller.tap');">상어잡이</a></td> -->
+                  <td><input type="button" id="showkeyboard" value="가상키보드" style="display:none" onclick="toggle_keyboard();"/></td>
                   </tr></table>
             </span>
         </div>    
         <div align="center">
             <canvas id="keyboardCanvas" oncontextmenu="event.preventDefault()"></canvas></div>
         </div>
-        <div align="center">게임 스샷을 클릭하면 테잎로딩이 시작되고 게임이 자동으로 실행됩니다.</div> 
+        <div align="center">휴대폰이나 타블릿은 가상키보드가 자동으로 나타납니다.<br/> 아래 게임 스샷을 클릭하면 테잎로딩이 시작되고 게임이 자동으로 실행됩니다.</div> 
         <div align="center"><a href="javascript:tape_loading('lode_runner1-mayhouse.tap');"><img class="img-concert" src="images/spc-1000_240720_0.png" /></a>
             <a href="javascript:tape_loading('ASTEROID%20BELT.tap','F6');"><img class="img-concert" src="images/spc-1000_240720_1.png" /></a>
             <a href="javascript:tape_loading('Xevious.cas');"><img class="img-concert" src="images/spc-1000_240720_2.png" /></a>
@@ -293,6 +293,27 @@
 
             const kcanvas = document.getElementById('keyboardCanvas');
             const ctx = kcanvas.getContext('2d');
+
+            var show_keyboard = false;
+            function toggle_keyboard() {
+                show_keyboard = true;
+                if (kcanvas.style.display =='none') {
+                    kcanvas.style.display = 'block'
+                    document.getElementById('showkeyboard').value = '가상키보드 닫기';    
+                }
+                else
+                {
+                    kcanvas.style.display = 'none'
+                    document.getElementById('showkeyboard').value = '가상키보드';    
+                }
+            }
+            function hasTouchSupport() {
+                return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            }
+            if (!hasTouchSupport() && !show_keyboard) {
+                kcanvas.style.display = 'none';
+                document.getElementById('showkeyboard').style.display = 'block';
+            }
         
             kcanvas.width = window.innerWidth * 0.95
             kcanvas.height = window.innerHeight / 2;
