@@ -559,12 +559,16 @@
                 return (a.toString(16) ===h.toLowerCase())
             }
             Module['onRuntimeInitialized'] = prepare_tape_loading;
+            var first_initialized = true
             function prepare_tape_loading()
             {
                 const tape = GetURLParameter('tape');
                 const load = GetURLParameter('load');
                 const exec = GetURLParameter('exec');
-                tape_loading(tape, load, exec)
+                if (first_initialized) {
+                    first_initialized = false
+                    tape_loading(tape, load, exec)
+                }
             }
             function tape_loading(tape, load, exec) {
                 if (tape) {
