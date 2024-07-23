@@ -54,7 +54,7 @@ else:
             title = c.제목 if type(c.제목) != float else '미분류 파일'
             subcmd = f'&{c.실행}' if type(c.실행) != float else ''
             execurl = f"https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd}"
-            comment =  (c.설명.replace('\n',' ') if type(c.설명) != float else '자세한 설명은 생략한다') + f'<br>**[{filename}](https://retro-1000.github.io/taps/{parse.quote(filename)})**'
+            comment =  (c.설명.replace('\n',' ').replace('|', ' &#x007c; ') if type(c.설명) != float else '자세한 설명은 생략한다') + f'<br>**[{filename}](https://retro-1000.github.io/taps/{parse.quote(filename)})**'
             imgfilename = f'{filename}.png'
             imgsize = ''
             if not os.path.exists(f'../docs/images/{imgfilename}'):
