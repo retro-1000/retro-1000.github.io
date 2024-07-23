@@ -8,7 +8,7 @@ csvfile = 'SPC1000_program_collection.csv'
 
 if not os.path.exists(csvfile):
     os.exit()
-a = pd.read_csv(csvfile, encoding='euc-kr', dtype={'실행': str, '설명': str}, index_col=0, encoding_errors='ignore')
+a = pd.read_csv(csvfile, encoding='euc-kr', dtype={'실행': str, '설명': str},  index_col=0, encoding_errors='ignore')
 
 if '-update' in sys.argv:
     import glob
@@ -30,7 +30,7 @@ else:
         sys.stdout = mystdout = StringIO()
     print('# 삼성전자 SPC-1000 소프트웨어에 대해서 알아보자')
     print('')
-    print('삼성 SPC-1000용 다양한 소프트웨어의 스크린샷과 함께 설명을 합니다. 스크린샷을 클릭하면 **실행화면이 열리고 테잎로딩이 실행**됩니다. 직접 실행해보세요.')
+    print('삼성 SPC-1000용 다양한 소프트웨어의 스크린샷과 함께 설명을 합니다. **제목** 또는 **스크린샷**을 클릭하면 **실행화면이 열리고 테잎로딩이 실행**됩니다. 직접 실행해보세요.')
     print('')
     print('## 목차')
     groups = list(a['분류'].unique())
@@ -52,20 +52,18 @@ else:
             if not os.path.exists(f'../docs/taps/{filename}'):
                 continue
             title = c.제목 if type(c.제목) != float else '미분류 파일'
-            comment = f'**[{filename}](https://retro-1000.github.io/taps/{parse.quote(filename)})**<br>' + (c.설명.replace('\n',' ') if type(c.설명) != float else '자세한 설명은 생략한다')
+            subcmd = f'&{c.실행}' if type(c.실행) != float else ''
+            execurl = f"https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd}"
+            comment =  (c.설명.replace('\n',' ') if type(c.설명) != float else '자세한 설명은 생략한다') + f'<br>**[{filename}](https://retro-1000.github.io/taps/{parse.quote(filename)})**'
             imgfilename = f'{filename}.png'
             imgsize = ''
-            if type(c.실행) != float:
-                subcmd = f'&{c.실행}'
-            else:
-                subcmd = ''
             if not os.path.exists(f'../docs/images/{imgfilename}'):
-                print(f'no {imgfilename}')
+                # print(f'no {imgfilename}')
                 fileurl = 'https://retro-1000.github.io/images/no_screenshot.png'
             else:
                 fileurl = f'https://retro-1000.github.io/images/{parse.quote(imgfilename)}'
                 filetag = f'[![{title}]({fileurl}{imgsize})](https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd})'
-            filetag = f'<a href="https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd}"><img src="{fileurl}"></a>'
+            filetag = f'<a href={execurl}><img src="{fileurl}"></a>'
             # print(c.실행)
             # print('###', title, f'({filename})')
             # print()
@@ -73,7 +71,7 @@ else:
             # print()
             # print('**설명**', comment)
             # print()
-            print(f'|{title}|{filetag}|{comment}|')
+            print(f'|[{title}]({execurl})|{filetag}|{comment}|')
         print()
 
     if 'mystdout' in locals():
