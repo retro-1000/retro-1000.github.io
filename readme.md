@@ -17,7 +17,6 @@
 |상어잡이|<a href="https://retro-1000.github.io?tape=sharkkiller.tap"><img src="https://retro-1000.github.io/images/sharkkiller.tap.png"></a>|**[sharkkiller.tap](https://retro-1000.github.io/taps/sharkkiller.tap)**<br>바다를 헤엄쳐 상어를 잡으러 갑니다. 해파리를 잡으면 다양한 점수가 나오고, 상어를 잡으면 50점이 제공됩니다.|
 |로드런너I|<a href="https://retro-1000.github.io?tape=lode_runner1-mayhouse.tap"><img src="https://retro-1000.github.io/images/lode_runner1-mayhouse.tap.png"></a>|**[lode_runner1-mayhouse.tap](https://retro-1000.github.io/taps/lode_runner1-mayhouse.tap)**<br>1983년작 퍼즐 액션 게임. 현 세대의 유저들에게는 인지도가 높지는 않지만, 당대에는 굉장한 인기를 끌었으며 80년대를 대표하는 명작 중 하나로 꼽히는 작품이다. 로드 러너 (lode runner)는 금괴도둑이라는 뜻이다. |
 |에스트로이드 벨트|<a href="https://retro-1000.github.io?tape=ASTEROID%20BELT.tap&load=F6"><img src="https://retro-1000.github.io/images/ASTEROID%20BELT.tap.png"></a>|**[ASTEROID BELT.tap](https://retro-1000.github.io/taps/ASTEROID%20BELT.tap)**<br>당시에는 널리 알려진 게임은 아닌데 무려 4색을 지원했다는 특징이 있는 슈팅게임이다|
-|제비우스|<a href="https://retro-1000.github.io?tape=Xevious.cas"><img src="https://retro-1000.github.io/images/Xevious.cas.png"></a>|**[Xevious.cas](https://retro-1000.github.io/taps/Xevious.cas)**<br>제비우스는 본격 슈팅게임의 화려한 비상의 계기가 된 게임이다. 말이 필요없다.|
 |어드밴쳐|<a href="https://retro-1000.github.io?tape=ADVENTURE.tap"><img src="https://retro-1000.github.io/images/ADVENTURE.tap.png"></a>|**[ADVENTURE.tap](https://retro-1000.github.io/taps/ADVENTURE.tap)**<br>자세한 설명은 생략한다|
 |바주카|<a href="https://retro-1000.github.io?tape=bazooka.tap"><img src="https://retro-1000.github.io/images/bazooka.tap.png"></a>|**[bazooka.tap](https://retro-1000.github.io/taps/bazooka.tap)**<br>자세한 설명은 생략한다|
 |벽돌깨기|<a href="https://retro-1000.github.io?tape=Block%20Game.tap"><img src="https://retro-1000.github.io/images/Block%20Game.tap.png"></a>|**[Block Game.tap](https://retro-1000.github.io/taps/Block%20Game.tap)**<br>자세한 설명은 생략한다|
@@ -28,27 +27,40 @@
 |ICBM|<a href="https://retro-1000.github.io?tape=ICBM.tap"><img src="https://retro-1000.github.io/images/ICBM.tap.png"></a>|**[ICBM.tap](https://retro-1000.github.io/taps/ICBM.tap)**<br>아래로 떨어지는 대륙간 탄토탄을 양쪽 레이저포가 맞주는 게임. 6개의 조작키와 레이저포의 고정된 45도 각도만 발사하는 것으로 난이도가 크게 올라간다|
 |빨간공|<a href="https://retro-1000.github.io?tape=RED%20BALL.tap&load=F6"><img src="https://retro-1000.github.io/images/RED%20BALL.tap.png"></a>|**[RED BALL.tap](https://retro-1000.github.io/taps/RED%20BALL.tap)**<br>INDEX 1985로 유추해볼 수 있는 것은 INDEX라는 회사가 1985년에 만든 게임이 아닐까? 게임은 AZJK 키로 빨간공을 움직여서 적으로 부터 피하는 것이다. 점수를 어떻게 내는지는 잘 모르겠다.|
 |우주보호자|<a href="https://retro-1000.github.io?tape=SINPANUFO.tap"><img src="https://retro-1000.github.io/images/SINPANUFO.tap.png"></a>|**[SINPANUFO.tap](https://retro-1000.github.io/taps/SINPANUFO.tap)**<br>우주보호자는 UFO가 지구를 향해 쏘는 레이저포를 막는 보호막을 움직여 방어하는 게임이다|
-|벽돌깨기|<a href="https://retro-1000.github.io?tape=%5Bsim%5Dblock.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[[sim]block.tap](https://retro-1000.github.io/taps/%5Bsim%5Dblock.tap)**<br>벽돌깨기 게임이다.|
+|벽돌깨기|<a href="https://retro-1000.github.io?tape=%5Bsim%5Dblock.tap"><img src="https://retro-1000.github.io/images/%5Bsim%5Dblock.tap.png"></a>|**[[sim]block.tap](https://retro-1000.github.io/taps/%5Bsim%5Dblock.tap)**<br>벽돌깨기 게임이다.|
 |컴퓨터오르간|<a href="https://retro-1000.github.io?tape=COMPUTERORGAN.tap"><img src="https://retro-1000.github.io/images/COMPUTERORGAN.tap.png"></a>|**[COMPUTERORGAN.tap](https://retro-1000.github.io/taps/COMPUTERORGAN.tap)**<br>자세한 설명은 생략한다|
 |미니오르간|<a href="https://retro-1000.github.io?tape=MINI%20ORGAN.tap"><img src="https://retro-1000.github.io/images/MINI%20ORGAN.tap.png"></a>|**[MINI ORGAN.tap](https://retro-1000.github.io/taps/MINI%20ORGAN.tap)**<br>키보드로 음악을 연주한다|
 |캉가루|<a href="https://retro-1000.github.io?tape=kangaroo.tap"><img src="https://retro-1000.github.io/images/kangaroo.tap.png"></a>|**[kangaroo.tap](https://retro-1000.github.io/taps/kangaroo.tap)**<br>엄청난 점프력의 캉가루, 우리친구 캉가루는 햄버거를 먹기 위해 죽기살기로 내달린다.|
-|투탄카멘|<a href="https://retro-1000.github.io?tape=TUTANCANMEN.cas"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[TUTANCANMEN.cas](https://retro-1000.github.io/taps/TUTANCANMEN.cas)**<br>시간 안에 열쇠를 찾아 미로를 탈출하는 미로게임. 시간이 흐를 수록 적들이 늘어 난다. 쉽게 끝낼 수 있을것 같지만 시간을 너무 조금 줬다. (오월의집)|
+|투탄카멘|<a href="https://retro-1000.github.io?tape=TUTANCANMEN.cas"><img src="https://retro-1000.github.io/images/TUTANCANMEN.cas.png"></a>|**[TUTANCANMEN.cas](https://retro-1000.github.io/taps/TUTANCANMEN.cas)**<br>시간 안에 열쇠를 찾아 미로를 탈출하는 미로게임. 시간이 흐를 수록 적들이 늘어 난다. 쉽게 끝낼 수 있을것 같지만 시간을 너무 조금 줬다. (오월의집)|
 |플래피|<a href="https://retro-1000.github.io?tape=Flappy.cas"><img src="https://retro-1000.github.io/images/Flappy.cas.png"></a>|**[Flappy.cas](https://retro-1000.github.io/taps/Flappy.cas)**<br>MSX 플래피게임중 카세트버전을 컨버전한 게임 (오월의집)|
-|젯셋윌리|<a href="https://retro-1000.github.io?tape=Jet%20set%20willy.cas"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[Jet set willy.cas](https://retro-1000.github.io/taps/Jet%20set%20willy.cas)**<br>유럽 애들은 방마다 돌아 다니면서 온갖 잡동사니 수집하는데 열광한다. 다른 기종에서도 자주 보이는 게임이다 (오월의집)|
+|젯셋윌리|<a href="https://retro-1000.github.io?tape=Jet%20set%20willy.cas"><img src="https://retro-1000.github.io/images/Jet%20set%20willy.cas.png"></a>|**[Jet set willy.cas](https://retro-1000.github.io/taps/Jet%20set%20willy.cas)**<br>유럽 애들은 방마다 돌아 다니면서 온갖 잡동사니 수집하는데 열광한다. 다른 기종에서도 자주 보이는 게임이다 (오월의집)|
+|잠수함파괴작전|<a href="https://retro-1000.github.io?tape=Deep-scan%20%281984%29%20%28staticsoft-samsung%29.cas"><img src="https://retro-1000.github.io/images/Deep-scan%20%281984%29%20%28staticsoft-samsung%29.cas.png"></a>|**[Deep-scan (1984) (staticsoft-samsung).cas](https://retro-1000.github.io/taps/Deep-scan%20%281984%29%20%28staticsoft-samsung%29.cas)**<br>그 당시는 SCREEN 0,0,0 화면에서 8도트씩 움직이는 게임이 많아서  SCREEN 0,0,2에서 부드럽게 움직이는 이 게임이 인상적이었다. 문뜩 "잠수함 파괴작전"으로 이라는 제목이 떠오르는데 이 게임 같다. (오월의집)|
 |메비우스|<a href="https://retro-1000.github.io?tape=Mevious%20%28198x%29%20%28-%29.cas"><img src="https://retro-1000.github.io/images/Mevious%20%28198x%29%20%28-%29.cas.png"></a>|**[Mevious (198x) (-).cas](https://retro-1000.github.io/taps/Mevious%20%28198x%29%20%28-%29.cas)**<br>오델로게임. 화면 움직임이 상당히 부드럽고 고급스러운것이 특징이나 오히려 너무 부드럽다보니 말 놓는 자리 선택이 너무 느려졌다. (오월의집)|
 |톰과제리|<a href="https://retro-1000.github.io?tape=Tom%20%26%20Jerry.cas"><img src="https://retro-1000.github.io/images/Tom%20%26%20Jerry.cas.png"></a>|**[Tom & Jerry.cas](https://retro-1000.github.io/taps/Tom%20%26%20Jerry.cas)**<br>SCREEN 0,0,2의 4색 컬러게임으로 생쥐 제리가 고양이 톰의 괴롭힘을 피해 치즈를 모으는 것이라고 하는데 알고보니 쥐가 고양이잡는 게임이었다. 톰이 때거리가 출현하면 어리버리 움직이다가 친구들이 다 죽고 두마리 남으면 갑자기 미친듯이 달려든다. 더군다나 못먹을줄 알았던 치즈까지 먹어대며 달려드는데 입에 거품물고 달려드는 고양이가 떠오를 지경이다. PC-6001의 "Cheese world"가 있고 동일하다. (오월의집)|
+|스토쿠|<a href="https://retro-1000.github.io?tape=SUDOKU.TAP"><img src="https://retro-1000.github.io/images/SUDOKU.TAP.png"></a>|**[SUDOKU.TAP](https://retro-1000.github.io/taps/SUDOKU.TAP)**<br>자세한 설명은 생략한다|
+|달구조대|<a href="https://retro-1000.github.io?tape=lunar_city-mayhouse.cas&load=F6"><img src="https://retro-1000.github.io/images/lunar_city-mayhouse.cas.png"></a>|**[lunar_city-mayhouse.cas](https://retro-1000.github.io/taps/lunar_city-mayhouse.cas)**<br>자세한 설명은 생략한다|
+|둘리|<a href="https://retro-1000.github.io?tape=dooli.TAP"><img src="https://retro-1000.github.io/images/dooli.TAP.png"></a>|**[dooli.TAP](https://retro-1000.github.io/taps/dooli.TAP)**<br>자세한 설명은 생략한다|
+|공사판|<a href="https://retro-1000.github.io?tape=%EA%B3%B5%EC%82%AC%ED%8C%90%28%EC%88%98%EC%A0%95%29-mayhouse.cas"><img src="https://retro-1000.github.io/images/%EA%B3%B5%EC%82%AC%ED%8C%90%28%EC%88%98%EC%A0%95%29-mayhouse.cas.png"></a>|**[공사판(수정)-mayhouse.cas](https://retro-1000.github.io/taps/%EA%B3%B5%EC%82%AC%ED%8C%90%28%EC%88%98%EC%A0%95%29-mayhouse.cas)**<br>자세한 설명은 생략한다|
+|스파이패닉|<a href="https://retro-1000.github.io?tape=%EC%8A%A4%ED%8C%8C%EC%9D%B4%ED%8C%A8%EB%8B%89-mayhouse.cas"><img src="https://retro-1000.github.io/images/%EC%8A%A4%ED%8C%8C%EC%9D%B4%ED%8C%A8%EB%8B%89-mayhouse.cas.png"></a>|**[스파이패닉-mayhouse.cas](https://retro-1000.github.io/taps/%EC%8A%A4%ED%8C%8C%EC%9D%B4%ED%8C%A8%EB%8B%89-mayhouse.cas)**<br>자세한 설명은 생략한다|
+|나이트로어|<a href="https://retro-1000.github.io?tape=knight_lore-mayhouse.cas"><img src="https://retro-1000.github.io/images/knight_lore-mayhouse.cas.png"></a>|**[knight_lore-mayhouse.cas](https://retro-1000.github.io/taps/knight_lore-mayhouse.cas)**<br>자세한 설명은 생략한다|
+|토이야|<a href="https://retro-1000.github.io?tape=toyar-4852-mayhouse.cas"><img src="https://retro-1000.github.io/images/toyar-4852-mayhouse.cas.png"></a>|**[toyar-4852-mayhouse.cas](https://retro-1000.github.io/taps/toyar-4852-mayhouse.cas)**<br>뭔가 제대로 동작하지 않습니다. 일본 PC-6001 버전을 컨버젼한 것으로 보입니다. |
 
 
 ## 프로그래밍
 
 |제목|스크린샷|설명|
 |---|---|---|
+no Assembler.tap.png
 |어셈블러|<a href="https://retro-1000.github.io?tape=Assembler.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[Assembler.tap](https://retro-1000.github.io/taps/Assembler.tap)**<br>1983년8월1일에 발매된 어셈블러이다. 어셈블러는 매우 중요했던 프로그래밍 도구였으나 이를 보유하고 있는 이가 매우 드물었다|
 |디스어셈블러|<a href="https://retro-1000.github.io?tape=DISASSEMBLER.tap"><img src="https://retro-1000.github.io/images/DISASSEMBLER.tap.png"></a>|**[DISASSEMBLER.tap](https://retro-1000.github.io/taps/DISASSEMBLER.tap)**<br>디스어셈블러는 당시 학생프로그래머한테 로망이었다. |
 |단순예제|<a href="https://retro-1000.github.io?tape=HELLO.tap"><img src="https://retro-1000.github.io/images/HELLO.tap.png"></a>|**[HELLO.tap](https://retro-1000.github.io/taps/HELLO.tap)**<br>프로그램을 소개하는 매우 간단한 베이직 프로그램|
+no RELOCATER 1_1.tap.png
 |재배치1_1|<a href="https://retro-1000.github.io?tape=RELOCATER%201_1.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[RELOCATER 1_1.tap](https://retro-1000.github.io/taps/RELOCATER%201_1.tap)**<br>자세한 설명은 생략한다|
+no RELOCATER(2).tap.png
 |재배치(2)|<a href="https://retro-1000.github.io?tape=RELOCATER%282%29.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[RELOCATER(2).tap](https://retro-1000.github.io/taps/RELOCATER%282%29.tap)**<br>자세한 설명은 생략한다|
+no RELOCATER.tap.png
 |재배치|<a href="https://retro-1000.github.io?tape=RELOCATER.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[RELOCATER.tap](https://retro-1000.github.io/taps/RELOCATER.tap)**<br>자세한 설명은 생략한다|
+no Styx Monitor.tap.png
 |신텍스모니터|<a href="https://retro-1000.github.io?tape=Styx%20Monitor.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[Styx Monitor.tap](https://retro-1000.github.io/taps/Styx%20Monitor.tap)**<br>기계어 모니터 프로그램으로 보인다.|
 |서브루틴|<a href="https://retro-1000.github.io?tape=SUB%20ROUTINE.tap"><img src="https://retro-1000.github.io/images/SUB%20ROUTINE.tap.png"></a>|**[SUB ROUTINE.tap](https://retro-1000.github.io/taps/SUB%20ROUTINE.tap)**<br>자세한 설명은 생략한다|
 |한글베이직|<a href="https://retro-1000.github.io?tape=%ED%95%9C%EA%B8%80%EB%B2%A0%EC%9D%B4%EC%A7%81.tap"><img src="https://retro-1000.github.io/images/%ED%95%9C%EA%B8%80%EB%B2%A0%EC%9D%B4%EC%A7%81.tap.png"></a>|**[한글베이직.tap](https://retro-1000.github.io/taps/%ED%95%9C%EA%B8%80%EB%B2%A0%EC%9D%B4%EC%A7%81.tap)**<br>한글베이직 프로그램이다. 한글입출력이 목적이 아니라 한글키워드로된 베이직으로 동작한다.|
@@ -59,10 +71,14 @@
 |제목|스크린샷|설명|
 |---|---|---|
 |LED도트디자이너|<a href="https://retro-1000.github.io?tape=LED.tap"><img src="https://retro-1000.github.io/images/LED.tap.png"></a>|**[LED.tap](https://retro-1000.github.io/taps/LED.tap)**<br>LED 도트 디자이너. 점을 찍어 그림을 완성하자|
+no LED1.tap.png
 |LED도트디자이너1|<a href="https://retro-1000.github.io?tape=LED1.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[LED1.tap](https://retro-1000.github.io/taps/LED1.tap)**<br>LED 도트 디자이너. 점을 찍어 그림을 완성하자. LED와 동일한 것으로 보인다|
+no MORSE(2).tap.png
 |모스부호(2)|<a href="https://retro-1000.github.io?tape=MORSE%282%29.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[MORSE(2).tap](https://retro-1000.github.io/taps/MORSE%282%29.tap)**<br>자세한 설명은 생략한다|
 |모스부호|<a href="https://retro-1000.github.io?tape=MORSE.tap"><img src="https://retro-1000.github.io/images/MORSE.tap.png"></a>|**[MORSE.tap](https://retro-1000.github.io/taps/MORSE.tap)**<br>모르스부호를 생성한다.|
+no 42column.cas.png
 |42칼럼|<a href="https://retro-1000.github.io?tape=42column.cas"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[42column.cas](https://retro-1000.github.io/taps/42column.cas)**<br>SPC-1000에서 42컬럼을 가능하게 하주는 속도빠른 프로그램 (오월의집)|
+|시그래프|<a href="https://retro-1000.github.io?tape=Sigrape2.tap"><img src="https://retro-1000.github.io/images/Sigrape2.tap.png"></a>|**[Sigrape2.tap](https://retro-1000.github.io/taps/Sigrape2.tap)**<br>자세한 설명은 생략한다|
 
 
 ## 교육
@@ -76,6 +92,8 @@
 
 |제목|스크린샷|설명|
 |---|---|---|
+no DASM & RLCT.tap.png
 |미분류 파일|<a href="https://retro-1000.github.io?tape=DASM%20%26%20RLCT.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[DASM & RLCT.tap](https://retro-1000.github.io/taps/DASM%20%26%20RLCT.tap)**<br>자세한 설명은 생략한다|
+no GRAPHIC EDITOR D.tap.png
 |미분류 파일|<a href="https://retro-1000.github.io?tape=GRAPHIC%20EDITOR%20D.tap"><img src="https://retro-1000.github.io/images/no_screenshot.png"></a>|**[GRAPHIC EDITOR D.tap](https://retro-1000.github.io/taps/GRAPHIC%20EDITOR%20D.tap)**<br>자세한 설명은 생략한다|
 

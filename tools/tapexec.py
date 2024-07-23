@@ -13,7 +13,9 @@ if len(sys.argv) > 1:
         else:
             sys.exit()
         fileurl = parse.quote(filename)
-        cmd = f'{chrome} http://localhost:8000?tape={fileurl}'    
+        cmd = f'{chrome} http://localhost:8000?tape={fileurl}'
+        import pyperclip
+        pyperclip.copy(filename)        
         print(cmd)
         open('cmd_list.txt', 'a+').write(cmd+'\n')
         os.system(cmd)     
