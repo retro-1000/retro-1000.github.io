@@ -63,7 +63,7 @@ else:
             else:
                 fileurl = f'https://retro-1000.github.io/images/{parse.quote(imgfilename)}'
                 filetag = f'[![{title}]({fileurl}{imgsize})](https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd})'
-            filetag = f'<a href={execurl}><img src="{fileurl}"></a>'
+            # filetag = f'<a href={execurl}><img src="{fileurl}"></a>'
             # print(c.실행)
             # print('###', title, f'({filename})')
             # print()
