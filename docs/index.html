@@ -5,8 +5,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>SPC-1000 Samsung Electronics 8bit personal computer</title>
         <style>
+            html {
+                height: 100%;
+            }
             body {
                 background-color: #ffffff;
+                border: 0px;
+                min-height: 100%;
+                margin: 0 auto;
             }
             #keyboardCanvas {
                 border: 1px solid #999;
@@ -16,15 +22,27 @@
                 width: 240px;
                 height: 180px;
             }
+            .game {
+                overflow: hidden;
+                display: block;    
+            }
         </style>
     </head>
     <body>
         <table align="center" padding="0">
             <tr><td valign="bottom"><img src="images/samsung_logo.png"></td><td style="font-family: 'Trebuchet MS'; font-size: 2.6rem; text-shadow: 4px 4px 5px gray; line-height: 1.2">&nbsp;SPC-1000&nbsp;<a href="https://github.com/retro-1000/retro-1000.github.io/issues">개선요청</a></td><td><img src="images/spc-1000.jpg"></td></tr>
         </table>
-        <div align="center"><span id='controls'><input type="button" value="🖭 로딩 SHIFT+F1" onclick="LOAD();"> <input type="button" value="&#x1F3C3; RUN" onclick="RUN();"> <input type="button" value="이전 🖭 ALT + ⇦" onclick="tape_prev();"> <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> <input type="button" value="리셋 &#x27f3;" onclick="RESET(1);"> <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()"></span></div>
+        <div align="center"><span id='controls'>
+            <input type="button" value="🖭 로딩 SHIFT+F1" onclick="LOAD();"> 
+            <input type="button" value="&#x1F3C3; RUN" onclick="RUN();"> 
+            <input type="button" value="이전 🖭 ALT + ⇦" onclick="tape_prev();"> 
+            <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> 
+            <input type="button" value="리셋 &#x27f3;" onclick="RESET(1);"> 
+            <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()">
+            <input type="button" value="스캔라인 &#x239a;" onclick="SCANLINE()">
+        </span></div>
         <div align="center">
-            <drop_zone><canvas id="canvas" oncontextmenu="event.preventDefault()" allow="autoplay"></canvas></drop_zone>
+            <drop_zone><canvas class="game" id="canvas" oncontextmenu="event.preventDefault()" allow="autoplay"></canvas></drop_zone>
         </div>
         <div align="center">
             <span>
@@ -117,6 +135,33 @@
             elem.style.outline = '';
             });
 
+            elem.addEventListener("orientationchange", (event) => {
+                changesize();
+                console.log(
+                    `the orientation of the device is now ${event.target.screen.orientation.angle}`,
+                );                
+            });
+
+            new ResizeObserver(changesize).observe(document.getElementById('canvas'))
+
+            function changesize() {
+                if (!hasTouchSupport() && !show_keyboard) {
+                    kcanvas.style.display = 'none';
+                    document.getElementById('showkeyboard').style.display = 'block';
+                } else {
+                    var w = 0, h = 0;
+                    if (typeof (window.innerWidth) == 'number') { //Chrome
+                        w = window.innerWidth / 2;
+                        h = window.innerHeight / 2;
+                    }
+                    if (h > w * 1.2)
+                        canvas.style.width = '100%';
+                    else {
+                        canvas.style.width = `${w / h / 1.2 * 100}%`;  
+                    }                
+                    // console.log(w, h, canvas.style.width, h > w * 1.5, h * 0.7);
+                }                
+            }
             // This is where the drop is handled.
             elem.addEventListener('drop', async (e) => {
             // Prevent navigation.
@@ -231,7 +276,13 @@
                 'number', // return type
                 ['number','number'], // argument types
                 [7,0]); // arguments                  
-            } 
+            }
+            function SCANLINE() {
+                var result = Module.ccall('remote', // name of C function
+                'number', // return type
+                ['number','number'], // argument types
+                [8,0]); // arguments                 
+            }
             async function upload_file() {
                 const curFiles = input.files;
                 for (const file of curFiles) {
@@ -261,18 +312,6 @@
                     }
                 }                
             }
-            // document.addEventListener("paste", (event) => {
-            //     event.preventDefault();
-            //     let paste = (event.clipboardData || window.clipboardData).getData("text");
-            //     console.log(paste)
-            //     emulatorTyping(paste, false);
-            //     // paste = paste.toUpperCase();
-            //     // const selection = window.getSelection();
-            //     // if (!selection.rangeCount) return;
-            //     // selection.deleteFromDocument();
-            //     // selection.getRangeAt(0).insertNode(document.createTextNode(paste));
-            //     // selection.collapseToEnd(); 
-            // });
             Date.prototype.format = function (f) {
                 if (!this.valueOf()) return " ";
                 var weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
@@ -311,6 +350,7 @@
                 show_keyboard = true;
                 if (kcanvas.style.display =='none') {
                     kcanvas.style.display = 'block'
+                    canvas.style.width = '640px';
                     document.getElementById('showkeyboard').value = '가상키보드 닫기';    
                 }
                 else
@@ -325,6 +365,8 @@
             if (!hasTouchSupport() && !show_keyboard) {
                 kcanvas.style.display = 'none';
                 document.getElementById('showkeyboard').style.display = 'block';
+            } else {
+                changesize();
             }
         
             kcanvas.width = window.innerWidth
