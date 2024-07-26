@@ -135,14 +135,14 @@
             elem.style.outline = '';
             });
 
-            elem.addEventListener("orientationchange", (event) => {
-                changesize();
-                console.log(
-                    `the orientation of the device is now ${event.target.screen.orientation.angle}`,
-                );                
-            });
+            // elem.addEventListener("orientationchange", (event) => {
+            //     changesize();
+            //     console.log(
+            //         `the orientation of the device is now ${event.target.screen.orientation.angle}`,
+            //     );                
+            // });
 
-            new ResizeObserver(changesize).observe(document.getElementById('canvas'))
+            // new ResizeObserver(changesize).observe(document.getElementById('canvas'))
 
             function changesize() {
                 if (!hasTouchSupport() && !show_keyboard) {
@@ -271,23 +271,20 @@
                 tapename = result;
                 screen_num = 0;
             };
-            function TURBO_OFF() {
-                var result = Module.ccall('remote', // name of C function
-                'number', // return type
-                ['number','number'], // argument types
-                [7,0]); // arguments                  
-            };
-            function SCANLINE_OFF() {
-                var result = Module.ccall('remote', // name of C function
-                'number', // return type
-                ['number','number'], // argument types
-                [8,0]); // arguments                 
+            function SCANLINE(onoff) {
+                Module.ccall('remote', 'number', ['number','number'], [8,onoff]);
             };
             function TOGGLE_SCANLINE() {
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
                 ['number','number'], // argument types
                 [8,2]); // arguments                 
+            };
+            function TURBO_OFF() {
+                var result = Module.ccall('remote', // name of C function
+                'number', // return type
+                ['number','number'], // argument types
+                [7,0]); // arguments                  
             };
             async function upload_file() {
                 const curFiles = input.files;
@@ -372,10 +369,10 @@
                 kcanvas.style.display = 'none';
                 document.getElementById('showkeyboard').style.display = 'block';
             } else {
-                TOGGLE_SCANLINE();
                 changesize();
+                setTimeout(() => SCANLINE(false), 500);
             }
-        
+       
             kcanvas.width = window.innerWidth
             kcanvas.height = window.innerHeight / 2;
         
