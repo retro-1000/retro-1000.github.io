@@ -276,19 +276,19 @@
                 'number', // return type
                 ['number','number'], // argument types
                 [7,0]); // arguments                  
-            }
-            function TOGGLE_SCANLINE() {
-                var result = Module.ccall('remote', // name of C function
-                'number', // return type
-                ['number','number'], // argument types
-                [8,2]); // arguments                 
-            }
+            };
             function SCANLINE_OFF() {
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
                 ['number','number'], // argument types
                 [8,0]); // arguments                 
-            }
+            };
+            function TOGGLE_SCANLINE() {
+                var result = Module.ccall('remote', // name of C function
+                'number', // return type
+                ['number','number'], // argument types
+                [8,2]); // arguments                 
+            };
             async function upload_file() {
                 const curFiles = input.files;
                 for (const file of curFiles) {
