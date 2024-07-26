@@ -39,7 +39,7 @@
             <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> 
             <input type="button" value="리셋 &#x27f3;" onclick="RESET(1);"> 
             <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()">
-            <input type="button" value="스캔라인 &#x239a;" onclick="SCANLINE()">
+            <input type="button" value="스캔라인 &#x239a;" onclick="TOGGLE_SCANLINE()">
         </span></div>
         <div align="center">
             <drop_zone><canvas class="game" id="canvas" oncontextmenu="event.preventDefault()" allow="autoplay"></canvas></drop_zone>
@@ -277,11 +277,17 @@
                 ['number','number'], // argument types
                 [7,0]); // arguments                  
             }
-            function SCANLINE() {
+            function TOGGLE_SCANLINE() {
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
                 ['number','number'], // argument types
-                [8,0]); // arguments                 
+                [8,2]); // arguments                 
+            }
+            function SCANLINE(onoff) {
+                var result = Module.ccall('remote', // name of C function
+                'number', // return type
+                ['number','number'], // argument types
+                [8,onoff]); // arguments                 
             }
             async function upload_file() {
                 const curFiles = input.files;
@@ -366,6 +372,7 @@
                 kcanvas.style.display = 'none';
                 document.getElementById('showkeyboard').style.display = 'block';
             } else {
+                SCANLINE(false);
                 changesize();
             }
         
