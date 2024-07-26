@@ -283,11 +283,11 @@
                 ['number','number'], // argument types
                 [8,2]); // arguments                 
             }
-            function SCANLINE(onoff) {
+            function SCANLINE_OFF() {
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
                 ['number','number'], // argument types
-                [8,onoff]); // arguments                 
+                [8,0]); // arguments                 
             }
             async function upload_file() {
                 const curFiles = input.files;
@@ -372,7 +372,7 @@
                 kcanvas.style.display = 'none';
                 document.getElementById('showkeyboard').style.display = 'block';
             } else {
-                SCANLINE(false);
+                SCANLINE_OFF();
                 changesize();
             }
         
