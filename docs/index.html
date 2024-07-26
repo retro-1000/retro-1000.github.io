@@ -135,15 +135,6 @@
             elem.style.outline = '';
             });
 
-            // elem.addEventListener("orientationchange", (event) => {
-            //     changesize();
-            //     console.log(
-            //         `the orientation of the device is now ${event.target.screen.orientation.angle}`,
-            //     );                
-            // });
-
-            // new ResizeObserver(changesize).observe(document.getElementById('canvas'))
-
             function changesize() {
                 if (!hasTouchSupport() && !show_keyboard) {
                     kcanvas.style.display = 'none';
@@ -370,7 +361,7 @@
                 document.getElementById('showkeyboard').style.display = 'block';
             } else {
                 changesize();
-                setTimeout(() => SCANLINE(false), 500);
+                // setTimeout(() => SCANLINE(false), 500);
             }
        
             kcanvas.width = window.innerWidth
