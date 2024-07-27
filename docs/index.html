@@ -258,8 +258,11 @@
                 'string', // return type
                 ['number', 'number', 'array', 'string'], // argument types
                 [6, length, data, filename]); // arguments  
-                console.log(result);
-                tapename = result;
+                console.log('tape_load:', result, filename);
+                if (filename.toLowerCase().includes('.zip'))
+                    tapename = filename;
+                else
+                    tapename = result;
                 screen_num = 0;
             };
             function SCANLINE(onoff) {
@@ -620,7 +623,7 @@
                             console.log('404 error')
                             return;
                         }
-                        const data = (cas || zip) ? new Uint8Array(this.response) : this.responseText;
+                        const data = new Uint8Array(this.response);
                         title = decodeURIComponent(tape)
                         let ms = data.length/150
                         console.log(data.length, tape, ms)
@@ -636,7 +639,7 @@
                                     setTimeout(() => LOAD(), ms += 2000);
                             });
                         }
-                        console.log(exec, ms)
+                        // console.log(exec, ms)
                         if (exec == null || exec.toUpperCase() == 'RUN')
                         {
                             setTimeout(() => RUN(), ms + 5000);
