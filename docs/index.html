@@ -71,7 +71,7 @@
             var Module = {
                 canvas: (function() { return document.getElementById('canvas'); })()
             };
-            function getCanvasBlob(canvas) {
+            async function getCanvasBlob(canvas) {
                 return new Promise(function(resolve, reject) {
                     canvas.toBlob(function(blob) {
                         resolve(blob)
@@ -85,6 +85,7 @@
                 var canvasblob = getCanvasBlob(canvas);
                 canvasblob.then(function(blob) {
                     var date = new Date().format('yyMMdd');
+                    console.log(blob.result)
                     if (tapename != null)
                         if (screen_num > 0)
                             screenshotfile = `${tapename}_${screen_num}.png` 
@@ -92,9 +93,16 @@
                             screenshotfile = `${tapename}.png`
                     else
                         screenshotfile =  `spc-1000_${date}_${screen_num}.png`
-                    console.log(tapename);
-                    saveBlob(blob, screenshotfile);
-                    screen_num += 1;
+                    // 화면캡쳐 사이즈가 5017이면 검은색 화면만 캡쳐된 것으로 이 경우 다시 클릭된 것으로 요청
+                    if (blob.size > 5017)
+                    {
+                        saveBlob(blob, screenshotfile);
+                        screen_num += 1;
+                    } 
+                    else
+                    {
+                        elem1.click();
+                    }
                 }, function(err) {
                     console.log(err)
                 });
