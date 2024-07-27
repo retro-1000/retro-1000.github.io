@@ -256,7 +256,7 @@
                 RESET();
                 var result  = Module.ccall('remote', // name of C function
                 'string', // return type
-                ['number', 'number', 'string', 'string'], // argument types
+                ['number', 'number', 'array', 'string'], // argument types
                 [6, length, data, filename]); // arguments  
                 console.log(result);
                 tapename = result;
@@ -611,20 +611,23 @@
             function tape_loading(tape, load, exec) {
                 if (tape != prev_tape) {
                     var req = new XMLHttpRequest();
+                    req.open("GET", "/taps/" + tape, true);
+                    req.responseType = "arraybuffer";
                     var cas = tape.toLowerCase().includes('.cas')
+                    var zip = tape.toLowerCase().includes('.zip')
                     req.onload = function(){
-                        var data = cas ? new Uint8Array(this.response) : this.responseText;
                         if (this.status == 404) {
                             console.log('404 error')
                             return;
                         }
+                        const data = (cas || zip) ? new Uint8Array(this.response) : this.responseText;
                         title = decodeURIComponent(tape)
                         let ms = data.length/150
                         console.log(data.length, tape, ms)
                         if (cas)
                             data = cas2tap(data)
                         ms = data.length/150
-                        console.log(data.length, tape, ms)
+                        console.log(data.length, tape, cas, zip, ms)
                         setTimeout(() => tape_load(data, data.length, title), ms);
                         setTimeout(() => LOAD(), ms += 2000);
                         if (load) {
