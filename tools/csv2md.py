@@ -59,10 +59,10 @@ else:
             imgsize = ''
             if not os.path.exists(f'../docs/images/{imgfilename}'):
                 # print(f'no {imgfilename}')
-                fileurl = 'https://retro-1000.github.io/images/no_screenshot.png'
+                fileurl = 'https://upload.wikimedia.org/wikipedia/commons/2/24/SPC-1000.JPG'
             else:
                 fileurl = f'https://retro-1000.github.io/images/{parse.quote(imgfilename)}'
-                filetag = f'[![{title}]({fileurl}{imgsize})](https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd})'
+            filetag = f'[![{title}]({fileurl}{imgsize})](https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd})'
             # filetag = f'<a href={execurl}><img src="{fileurl}"></a>'
             # print(c.실행)
             # print('###', title, f'({filename})')
