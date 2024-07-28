@@ -74,3 +74,4 @@
 "C:/Program Files/Google/Chrome/Application/chrome.exe" http://localhost:8000?tape=INVADERS.TAP
 "C:/Program Files/Google/Chrome/Application/chrome.exe" http://localhost:8000?tape=GOLDCAVERN.tap
 "C:/Program Files/Google/Chrome/Application/chrome.exe" http://localhost:8000?tape=%5Bsim%5Dblock.tap
+"C:/Program Files/Google/Chrome/Application/chrome.exe" http://localhost:8000?tape=NAUTIL.TAP
