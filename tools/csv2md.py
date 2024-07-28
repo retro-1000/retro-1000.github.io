@@ -262,7 +262,7 @@ if '-html' in sys.argv:
 </thead>
 <tbody>''')
         index = 1
-        for no in b.index:
+        for no in b.sort_values(['순위'], ascending=False).index:
             c = b.loc[no]
             filename = c.파일
             if not os.path.exists(f'../docs/taps/{filename}'):
@@ -312,7 +312,7 @@ else:
         b = a[a.분류==group]
         print('|제목|스크린샷|설명|')
         print('|---|---|---|')
-        for no in b.index:
+        for no in b.sort_values(['순위'], ascending=False).index:
             c = b.loc[no]
             filename = c.파일
             if not os.path.exists(f'../docs/taps/{filename}'):
