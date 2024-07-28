@@ -187,18 +187,12 @@
                       console.log(`File: ${handle.name}`);
                       const filename = handle.name;
                       const file = await handle.getFile();
+                      const data = new Uint8Array(await file.arrayBuffer());
                       if (filename.toLowerCase().includes('.cas'))
-                      {
-                        ndata = cas2tap(new Uint8Array(await file.arrayBuffer()))
-                        tape_load(ndata, ndata.length, filename);
-                      }
+                        ndata = cas2tap(data);
                       else
-                      {
-                        const data = await file.text();
-                        const length = data.length;
-                        tape_load(data, length, filename);
-                      }
-
+                        ndata = data;
+                      tape_load(ndata, ndata.length, filename);
                     }
                 }
             });
@@ -266,7 +260,7 @@
                 'string', // return type
                 ['number', 'number', 'array', 'string'], // argument types
                 [6, length, data, filename]); // arguments  
-                console.log('tape_load:', result, filename);
+                console.log('tape_load:', result, filename, length);
                 if (filename.toLowerCase().includes('.zip'))
                     tapename = filename;
                 else
@@ -293,28 +287,12 @@
                 for (const file of curFiles) {
                     // const file = await handle.getFile();
                     filename = file.name;
+                    const adata = new Uint8Array(await file.arrayBuffer());
                     if (filename.toLowerCase().includes('.cas'))
-                    {
-                      const adata = new Uint8Array(await file.arrayBuffer());
-                      const length = adata.byteLength;
-                      console.log(length, adata);
-                      let ndata = "";
-                      for (i = 0x10; i < length; i++)
-                      {
-                          for(j = 0; j < 8; j++)
-                              if (adata[i]&(0x80>>j))
-                                  ndata += '1';
-                              else
-                                  ndata += '0';
-                      }
-                      tape_load(ndata, ndata.length, filename);
-                    }
+                        ndata = cas2tap(adata);
                     else
-                    {
-                      const data = await file.text();
-                      const length = data.length;
-                      tape_load(data, length, filename);
-                    }
+                        ndata = adata;
+                    tape_load(ndata, ndata.length, filename);
                 }                
             }
             Date.prototype.format = function (f) {
