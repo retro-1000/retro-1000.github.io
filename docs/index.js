@@ -39,7 +39,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpg103amo0.js
+// include: /tmp/tmp38xdkc54.js
 
   if (!Module.expectedDataFileDownloads) {
     Module.expectedDataFileDownloads = 0;
@@ -216,25 +216,25 @@ Module['FS_createPath']("/", "taps2", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/taps2/1_demo.tap", "start": 0, "end": 1232903}, {"filename": "/taps2/2_sharkkiller.tap", "start": 1232903, "end": 1336193}, {"filename": "/taps2/3_APPLE THIEF.tap", "start": 1336193, "end": 1557377}, {"filename": "/taps2/4_rocknroll.tap", "start": 1557377, "end": 1851047}], "remote_package_size": 1851047});
+    loadPackage({"files": [{"filename": "/taps2/1_\ub370\ubaa8.tap", "start": 0, "end": 1232903}, {"filename": "/taps2/2_\uc0c1\uc5b4\uc7a1\uc774.tap", "start": 1232903, "end": 1336193}, {"filename": "/taps2/3_\uc0ac\uacfc\ub3c4\ub451.tap", "start": 1336193, "end": 1557377}, {"filename": "/taps2/4_\ub77d\ud070\ub864.tap", "start": 1557377, "end": 1851047}, {"filename": "/taps2/cmd_list.txt", "start": 1851047, "end": 1851278}], "remote_package_size": 1851278});
 
   })();
 
-// end include: /tmp/tmpg103amo0.js
-// include: /tmp/tmpogfgt63d.js
+// end include: /tmp/tmp38xdkc54.js
+// include: /tmp/tmp71e1rr_i.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: /tmp/tmpogfgt63d.js
-// include: /tmp/tmpgusrkpxb.js
+  // end include: /tmp/tmp71e1rr_i.js
+// include: /tmp/tmpbl_6wi57.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: /tmp/tmpgusrkpxb.js
+  // end include: /tmp/tmpbl_6wi57.js
 
 
 // Sometimes an existing Module object exists with properties
