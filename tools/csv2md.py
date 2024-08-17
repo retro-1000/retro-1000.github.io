@@ -21,11 +21,13 @@ if '-update' in sys.argv:
         if not file in list(a['파일']):
             update = True
             print(file, length)
-            a.loc[length]=['','',file,'','','','','']
+            a.loc[length]=['','','',file,'','','','','']
             length += 1
     if update:
         a.to_csv(csvfile, encoding='euc-kr')
-    os.exit()
+    sys.exit()
+else:
+    a  = a[a.분류.notna()]
 title = '삼성전자 SPC-1000 소프트웨어에 대해서 알아보자'
 summary = '삼성 SPC-1000용 다양한 소프트웨어의 스크린샷과 함께 설명을 합니다. **제목** 또는 **스크린샷**을 클릭하면 **실행화면이 열리고 테잎로딩이 실행**됩니다. 직접 실행해보세요.'
 groups = list(a['분류'].unique())
@@ -279,7 +281,7 @@ if '-html' in sys.argv:
                 # print(f'no {imgfilename}')
                 imgurl = 'https://upload.wikimedia.org/wikipedia/commons/2/24/SPC-1000.JPG'
             else:
-                imgurl = f'https://retro-1000.github.io/images/{parse.quote(imgfilename)}'
+                imgurl = f'/images/{parse.quote(imgfilename)}'
             table_html.append(f'''<tr class="{'odd' if index%2 else 'even'}">
 <td width="100px"><a
 href="{execurl}">{index}. {title}</a></td>
