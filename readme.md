@@ -113,6 +113,7 @@
 |[모스부호](https://retro-1000.github.io?tape=MORSE.tap)|[![모스부호](https://retro-1000.github.io/images/MORSE.tap.png)](https://retro-1000.github.io?tape=MORSE.tap)|모르스부호를 생성한다.<br>**[MORSE.tap](https://retro-1000.github.io/taps/MORSE.tap)**|
 |[42칼럼](https://retro-1000.github.io?tape=42column.cas)|[![42칼럼](https://upload.wikimedia.org/wikipedia/commons/2/24/SPC-1000.JPG)](https://retro-1000.github.io?tape=42column.cas)|SPC-1000에서 42컬럼을 가능하게 하주는 속도빠른 프로그램 (오월의집)<br>**[42column.cas](https://retro-1000.github.io/taps/42column.cas)**|
 |[시그래프](https://retro-1000.github.io?tape=Sigrape2.tap)|[![시그래프](https://retro-1000.github.io/images/Sigrape2.tap.png)](https://retro-1000.github.io?tape=Sigrape2.tap)|SPC-1000용 그래픽 소프트웨어입니다. 딸랑2색만 가능한 SCREEN 0,0,5 에서 나름 SPC-1000를 최대한 활용하여 컬러가 가능하게하고 여러가지 편리한 기능을 넣었습니다. [출처] SPC-1000 그래픽 / 시그레이프2 / SIGRAPE2 &#x007c; 작성자 오월의집<br>**[Sigrape2.tap](https://retro-1000.github.io/taps/Sigrape2.tap)**|
+|[GOOD PICTURE](https://retro-1000.github.io?tape=good.tap)|[![GOOD PICTURE](https://retro-1000.github.io/images/good.tap.png)](https://retro-1000.github.io?tape=good.tap)|20 여년전 고등학교때 만들어 삼성소프트 공모전에 응모했던 SPC-1000 그래픽 에디터 프로그램 'GOOD PICTURE'입니다. 요즘 나오는 프로그램들에 비해 초라하지만 당시 필요한 기능들은 다 구현해내었네요. 지금봐도 신통하군요. ㅋㅋ 여기저기 학교에서 축제용으로 쓴다고 인기도 많았지만 (나중에 디스크를 이용한 슬라이드 쇼 까지 만들었습니다) 정작 리스트나 테입등 제게 남은건 아무것도 없네요. - 로드런너<br>**[good.tap](https://retro-1000.github.io/taps/good.tap)**|
 
 
 ## 교육
