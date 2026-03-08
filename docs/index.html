@@ -5,8 +5,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>SPC-1000 Samsung Electronics 8bit personal computer</title>
         <style>
+            html {
+                height: 100%;
+            }
             body {
                 background-color: #ffffff;
+                border: 0px;
+                min-height: 100%;
+                margin: 0 auto;
             }
             #keyboardCanvas {
                 border: 1px solid #999;
@@ -16,15 +22,37 @@
                 width: 240px;
                 height: 180px;
             }
+            .game {
+                overflow: hidden;
+                display: block;    
+            }
+            .third {
+                border-color: red;
+                color: #fff;
+                box-shadow: 0 0 40px 40px red inset, 0 0 0 0 red;
+                transition: all 150ms ease-in-out;
+            
+                &:hover {
+                    box-shadow: 0 0 10px 0 red inset, 0 0 10px 4px red;
+                }
+            }
         </style>
     </head>
     <body>
         <table align="center" padding="0">
             <tr><td valign="bottom"><img src="images/samsung_logo.png"></td><td style="font-family: 'Trebuchet MS'; font-size: 2.6rem; text-shadow: 4px 4px 5px gray; line-height: 1.2">&nbsp;SPC-1000&nbsp;<a href="https://github.com/retro-1000/retro-1000.github.io/issues">개선요청</a></td><td><img src="images/spc-1000.jpg"></td></tr>
         </table>
-        <div align="center"><span id='controls'><input type="button" value="🖭 로딩 SHIFT+F1" onclick="LOAD();"> <input type="button" value="&#x1F3C3; RUN" onclick="RUN();"> <input type="button" value="이전 🖭 ALT + ⇦" onclick="tape_prev();"> <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> <input type="button" value="리셋 &#x27f3;" onclick="RESET(1);"> <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()"></span></div>
+        <div align="center" id="menu"><span id='controls'>
+            <input type="button" value="🖭 로딩 SHIFT+F1" onclick="LOAD();"> 
+            <input type="button" value="&#x1F3C3; RUN" onclick="RUN();"> 
+            <input type="button" value="이전 🖭 ALT + ⇦" onclick="tape_prev();"> 
+            <input type="button" value="다음 🖭 ALT + ⇨" onclick="tape_next();"> 
+            <input type="button" value="전체화면 &#x26F6;" onclick="Module['canvas'].requestFullscreen()">
+            <input type="button" value="스캔라인 &#x239a;" onclick="TOGGLE_SCANLINE()">
+            <input type="button" value="리셋 &#x27f3;" onclick="RESET(1);" class="third"> 
+        </span></div>
         <div align="center">
-            <drop_zone><canvas id="canvas" oncontextmenu="event.preventDefault()" allow="autoplay"></canvas></drop_zone>
+            <drop_zone><canvas class="game" id="canvas" oncontextmenu="event.preventDefault()" allow="autoplay"></canvas></drop_zone>
         </div>
         <div align="center">
             <span>
@@ -37,14 +65,14 @@
                   <td><a href="http://hits.dwyl.com/spc-1000/spc-1000githubio" target="_blank">
                     <img src="https://hits.dwyl.com/spc-1000/spc-1000githubio.svg?style=flat&show=unique"></a></td>
                   <td><button id="screenshot" type="button"> &#x2399; 화면캡처</button></td>
-                  <!-- <td><a href="javascript:tape_loading('sharkkiller.tap');">상어잡이</a></td> -->
+                  <td><input type="button" id="showkeyboard" value="가상키보드" style="display:none" onclick="toggle_keyboard();"/></td>
                   </tr></table>
             </span>
         </div>    
         <div align="center">
             <canvas id="keyboardCanvas" oncontextmenu="event.preventDefault()"></canvas></div>
         </div>
-        <div align="center">게임 스샷을 클릭하면 테잎로딩이 시작되고 게임이 자동으로 실행됩니다.</div> 
+        <div align="center">휴대폰이나 타블릿은 가상키보드가 자동으로 나타납니다.<br/><a href="software_collection.html">많은 소프트웨어 목록은 이곳에 있습니다.</a><br/>아래 게임 스샷을 클릭하면 테잎로딩이 시작되고 게임이 자동으로 실행됩니다.</div> 
         <div align="center"><a href="javascript:tape_loading('lode_runner1-mayhouse.tap');"><img class="img-concert" src="images/spc-1000_240720_0.png" /></a>
             <a href="javascript:tape_loading('ASTEROID%20BELT.tap','F6');"><img class="img-concert" src="images/spc-1000_240720_1.png" /></a>
             <a href="javascript:tape_loading('Xevious.cas');"><img class="img-concert" src="images/spc-1000_240720_2.png" /></a>
@@ -53,7 +81,7 @@
             var Module = {
                 canvas: (function() { return document.getElementById('canvas'); })()
             };
-            function getCanvasBlob(canvas) {
+            async function getCanvasBlob(canvas) {
                 return new Promise(function(resolve, reject) {
                     canvas.toBlob(function(blob) {
                         resolve(blob)
@@ -67,6 +95,7 @@
                 var canvasblob = getCanvasBlob(canvas);
                 canvasblob.then(function(blob) {
                     var date = new Date().format('yyMMdd');
+                    console.log(blob.result)
                     if (tapename != null)
                         if (screen_num > 0)
                             screenshotfile = `${tapename}_${screen_num}.png` 
@@ -74,9 +103,16 @@
                             screenshotfile = `${tapename}.png`
                     else
                         screenshotfile =  `spc-1000_${date}_${screen_num}.png`
-                    console.log(tapename);
-                    saveBlob(blob, screenshotfile);
-                    screen_num += 1;
+                    // 화면캡쳐 사이즈가 5017이면 검은색 화면만 캡쳐된 것으로 이 경우 다시 클릭된 것으로 요청
+                    if (blob.size > 5017)
+                    {
+                        saveBlob(blob, screenshotfile);
+                        screen_num += 1;
+                    } 
+                    else
+                    {
+                        elem1.click();
+                    }
                 }, function(err) {
                     console.log(err)
                 });
@@ -117,6 +153,24 @@
             elem.style.outline = '';
             });
 
+            function changesize() {
+                if (!hasTouchSupport() && !show_keyboard) {
+                    kcanvas.style.display = 'none';
+                    document.getElementById('showkeyboard').style.display = 'block';
+                } else {
+                    var w = 0, h = 0;
+                    if (typeof (window.innerWidth) == 'number') { //Chrome
+                        w = window.innerWidth / 2;
+                        h = window.innerHeight / 2;
+                    }
+                    if (h > w * 1.2)
+                        canvas.style.width = '100%';
+                    else {
+                        canvas.style.width = `${w / h / 1.2 * 100}%`;  
+                    }                
+                    // console.log(w, h, canvas.style.width, h > w * 1.5, h * 0.7);
+                }                
+            }
             // This is where the drop is handled.
             elem.addEventListener('drop', async (e) => {
             // Prevent navigation.
@@ -143,18 +197,12 @@
                       console.log(`File: ${handle.name}`);
                       const filename = handle.name;
                       const file = await handle.getFile();
+                      const data = new Uint8Array(await file.arrayBuffer());
                       if (filename.toLowerCase().includes('.cas'))
-                      {
-                        ndata = cas2tap(new Uint8Array(await file.arrayBuffer()))
-                        tape_load(ndata, ndata.length, filename);
-                      }
+                        ndata = cas2tap(data);
                       else
-                      {
-                        const data = await file.text();
-                        const length = data.length;
-                        tape_load(data, length, filename);
-                      }
-
+                        ndata = data;
+                      tape_load(ndata, ndata.length, filename);
                     }
                 }
             });
@@ -220,45 +268,41 @@
                 RESET();
                 var result  = Module.ccall('remote', // name of C function
                 'string', // return type
-                ['number', 'number', 'string', 'string'], // argument types
+                ['number', 'number', 'array', 'string'], // argument types
                 [6, length, data, filename]); // arguments  
-                console.log(result);
-                tapename = result;
+                console.log('tape_load:', result, filename, length);
+                if (filename.toLowerCase().includes('.zip'))
+                    tapename = filename;
+                else
+                    tapename = result;
                 screen_num = 0;
+            };
+            function SCANLINE(onoff) {
+                Module.ccall('remote', 'number', ['number','number'], [8,onoff]);
+            };
+            function TOGGLE_SCANLINE() {
+                var result = Module.ccall('remote', // name of C function
+                'number', // return type
+                ['number','number'], // argument types
+                [8,2]); // arguments                 
             };
             function TURBO_OFF() {
                 var result = Module.ccall('remote', // name of C function
                 'number', // return type
                 ['number','number'], // argument types
                 [7,0]); // arguments                  
-            } 
+            };
             async function upload_file() {
                 const curFiles = input.files;
                 for (const file of curFiles) {
                     // const file = await handle.getFile();
                     filename = file.name;
+                    const adata = new Uint8Array(await file.arrayBuffer());
                     if (filename.toLowerCase().includes('.cas'))
-                    {
-                      const adata = new Uint8Array(await file.arrayBuffer());
-                      const length = adata.byteLength;
-                      console.log(length, adata);
-                      let ndata = "";
-                      for (i = 0x10; i < length; i++)
-                      {
-                          for(j = 0; j < 8; j++)
-                              if (adata[i]&(0x80>>j))
-                                  ndata += '1';
-                              else
-                                  ndata += '0';
-                      }
-                      tape_load(ndata, ndata.length, filename);
-                    }
+                        ndata = cas2tap(adata);
                     else
-                    {
-                      const data = await file.text();
-                      const length = data.length;
-                      tape_load(data, length, filename);
-                    }
+                        ndata = adata;
+                    tape_load(ndata, ndata.length, filename);
                 }                
             }
             Date.prototype.format = function (f) {
@@ -293,14 +337,39 @@
 
             const kcanvas = document.getElementById('keyboardCanvas');
             const ctx = kcanvas.getContext('2d');
-        
-            kcanvas.width = window.innerWidth * 0.95
+
+            var show_keyboard = false;
+            function toggle_keyboard() {
+                show_keyboard = true;
+                if (kcanvas.style.display =='none') {
+                    kcanvas.style.display = 'block'
+                    canvas.style.width = '640px';
+                    document.getElementById('showkeyboard').value = '가상키보드 닫기';    
+                }
+                else
+                {
+                    kcanvas.style.display = 'none'
+                    document.getElementById('showkeyboard').value = '가상키보드';    
+                }
+            }
+            function hasTouchSupport() {
+                return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            }
+            if (!hasTouchSupport() && !show_keyboard) {
+                kcanvas.style.display = 'none';
+                document.getElementById('showkeyboard').style.display = 'block';
+            } else {
+                changesize();
+                // setTimeout(() => SCANLINE(false), 500);
+            }
+       
+            kcanvas.width = window.innerWidth
             kcanvas.height = window.innerHeight / 2;
         
             const normalKeys = [
                 ['F1', 'F2', 'F3', 'F4', 'F5', ' ', 'HOME', '←', '→', '↑', '↓'],
-                ['ESC', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '^', '\\', 'BREAK'],
-                ['TAB', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '[',  'DEL', 'GRP'],
+                ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '^', '\\', 'BREAK'],
+                ['ESC', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '[',  'DEL', 'GRP'],
                 ['CTRL', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', ":", ']', 'RETURN'],
                 ['SHIFT', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'SHIFT'],
                 ['LOCK', 'SPACE']
@@ -308,8 +377,8 @@
         
             const shiftKeys = [
                 ['F1', 'F2', 'F3', 'F4', 'F5', ' ', 'CLS', '←', '→', '↑', '↓'],
-                ['ESC', '!', '"', '#', '$', '%', '&', "'", '(', ')', '0', '=', '~', '\\', 'BREAK'],
-                ['TAB', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '{', 'INS', 'GRP'],
+                ['!', '"', '#', '$', '%', '&', "'", '(', ')', '0', '=', '~', '\\', 'BREAK'],
+                ['ESC', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '@', '{', 'INS', 'GRP'],
                 ['CTRL', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '+', '*', '}', 'RETURN'],
                 ['SHIFT', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 'SHIFT'],
                 ['LOCK', 'SPACE']
@@ -318,7 +387,7 @@
             let nkeys = [].concat(...normalKeys);
             let skeys = [].concat(...shiftKeys);
             
-            const offsets = [40,10,0,0,0,50]
+            const offsets = [40,40,0,0,0,90]
         
             let keyWidth, keyHeight;
             let isShiftToggled = false;
@@ -331,7 +400,7 @@
             const keyClickSound = new Audio('typing.wav'); // 키 클릭 사운드 파일 경로를 지정하세요
         
             function calculateKeySize() {
-                keyWidth = (kcanvas.width) / 15.5;
+                keyWidth = (kcanvas.width) / 15;
                 keyHeight = kcanvas.height / 6;
             }
         
@@ -360,7 +429,7 @@
                 ctx.stroke();
         
                 ctx.fillStyle = specialKeys.includes(key) ? '#ffffff' : '#333333';
-                ctx.font = '14px Arial';
+                ctx.font = 'bold 16px Arial';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText(key, x + width / 2, y + height / 2, width * 0.8);
@@ -378,8 +447,7 @@
                         let height = keyHeight;
                         
                         if (key === 'SPACE') width = keyWidth * 10;
-                        else if (['F1','F2', 'F3', 'F4', 'F5', 'TAB', 'LOCK', 'RETURN'].includes(key)) width = keyWidth * 1.5;
-                        else if (key == 'CTRL') width = keyWidth * 1.7;
+                        else if (['F1','F2', 'F3', 'F4', 'F5', 'CTRL', 'TAB', 'LOCK', 'RETURN'].includes(key)) width = keyWidth * 1.5;
                         else if (key == 'SHIFT') width = keyWidth * 2;
                         
                         if (key != ' ')
@@ -419,8 +487,6 @@
                             
                             if (key === 'SHIFT') {
                                 isShiftToggled = !isShiftToggled;
-                            } else if (key === 'LOCK') {
-                                isLockToggled = !isLockToggled;
                             } else if (key === 'CTRL') {
                                 isCtrlToggled = !isCtrlToggled;
                             } else if (key === 'GRP') {
@@ -486,9 +552,11 @@
                 // console.log('Emulator key press:', key, isShiftToggled, isCtrlToggled, isGRPToggled, isLockToggled);
                 Module.ccall('keydown', 'null', ['string','boolean', 'boolean', 'boolean','boolean','boolean'], [key, shift != null ? shift : isShiftToggled, isCtrlToggled, isGRPToggled, isLockToggled, shift != null]);
             }
-            function emulatorTyping(cmd) {
+            function emulatorTyping(cmd, turbooff=true) {
                 let ms = 0;
-                TURBO_OFF();
+                if (turbooff)
+                    TURBO_OFF();
+                emulatorKeyPress(null);
                 cmd.split('').forEach((c) => {
                     let uppercase = false;
                     if (c == ' ')
@@ -499,20 +567,14 @@
                         c = c.toUpperCase()
                     } else if (c >= 'A' && c <= 'Z') 
                         uppercase = true;
-//                    console.log(c, uppercase, nkeys.indexOf(c), skeys.indexOf(c))
                     if (!uppercase && nkeys.indexOf(c)>=0) {
                         setTimeout(() => emulatorKeyPress(c, false), ms += 50);
-                        // ms += 100;
-//                        setTimeout(() => emulatorKeyPress(null), ms += 30);
                     } else if (skeys.indexOf(c)>=0) {
                         c = nkeys[skeys.indexOf(c)]
                         setTimeout(() => emulatorKeyPress(c, true), ms += 50);
-                        // ms += 100;
-//                        setTimeout(() => emulatorKeyPress(null), ms += 20);
                     } else {
                         console.log('error:',c)
                     }
-//                    ms += 100;
                 });
             }
             function GetURLParameter(sParam)
@@ -533,30 +595,38 @@
                 return (a.toString(16) ===h.toLowerCase())
             }
             Module['onRuntimeInitialized'] = prepare_tape_loading;
+            var first_initialized = true
+            var prev_tape = null;
             function prepare_tape_loading()
             {
                 const tape = GetURLParameter('tape');
                 const load = GetURLParameter('load');
                 const exec = GetURLParameter('exec');
-                tape_loading(tape, load, exec)
+                if (first_initialized) {
+                    first_initialized = false
+                    tape_loading(tape, load, exec)
+                }
             }
             function tape_loading(tape, load, exec) {
-                if (tape) {
+                if (tape != prev_tape) {
                     var req = new XMLHttpRequest();
+                    req.open("GET", "/taps/" + tape, true);
+                    req.responseType = "arraybuffer";
                     var cas = tape.toLowerCase().includes('.cas')
+                    var zip = tape.toLowerCase().includes('.zip')
                     req.onload = function(){
-                        var data = cas ? new Uint8Array(this.response) : this.responseText;
                         if (this.status == 404) {
                             console.log('404 error')
                             return;
                         }
+                        const data = new Uint8Array(this.response);
                         title = decodeURIComponent(tape)
                         let ms = data.length/150
                         console.log(data.length, tape, ms)
                         if (cas)
                             data = cas2tap(data)
                         ms = data.length/150
-                        console.log(data.length, tape, ms)
+                        console.log(data.length, tape, cas, zip, ms)
                         setTimeout(() => tape_load(data, data.length, title), ms);
                         setTimeout(() => LOAD(), ms += 2000);
                         if (load) {
@@ -565,10 +635,10 @@
                                     setTimeout(() => LOAD(), ms += 2000);
                             });
                         }
-                        console.log(exec, ms)
+                        // console.log(exec, ms)
                         if (exec == null || exec.toUpperCase() == 'RUN')
                         {
-                            setTimeout(() => RUN(), ms + 2000);
+                            setTimeout(() => RUN(), ms + 5000);
                             return;
                         } else if (exec == '')
                             return;
@@ -581,7 +651,8 @@
                     req.open('GET', `./taps/${tape}`);
                     if (cas)
                         req.responseType = "arraybuffer";
-                    req.send();                
+                    req.send(); 
+                    prev_tape = tape;               
                 }
             }
         </script>
