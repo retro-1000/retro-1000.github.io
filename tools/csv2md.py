@@ -229,7 +229,7 @@ if '-html' in sys.argv:
 </head>
 <body>
 <h1 id="삼성전자-spc-1000-소프트웨어에-대해서-알아보자">{{title}}</h1>
-<p>{{summary}}</p>
+{{summary}}
 {{group}}
 {{table}}
 </body>
@@ -270,11 +270,21 @@ if '-html' in sys.argv:
             if not os.path.exists(f'../docs/taps/{filename}'):
                 print(filename)
                 continue
+            tap_path = f'../docs/taps/{filename}'
+            wav_filename = f'{filename}.wav'
+            wav_path = f'../docs/taps/{wav_filename}'
+            if filename.lower().endswith('.tap') and not os.path.exists(wav_path):
+                import subprocess
+                subprocess.run(['/home/msx/spc1000/baremetal/tap2wav', tap_path, wav_path], stdout=subprocess.DEVNULL)
+                if os.path.exists(wav_path) and os.path.getsize(wav_path) >= 50 * 1000 * 1000:
+                    os.remove(wav_path)
             title = c.제목 if type(c.제목) != float else filename
             subcmd = f'&{c.실행}' if type(c.실행) != float else ''
             execurl = f"https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd}"
             fileurl = f'https://retro-1000.github.io/taps/{parse.quote(filename)}'
             comment =  (c.설명.replace('\n',' ').replace('|', ' &#x007c; ') if type(c.설명) != float else '자세한 설명은 아직 정리하지 못했다') + f'<br>**[{filename}](https://retro-1000.github.io/taps/{parse.quote(filename)})**'
+            if os.path.exists(wav_path):
+                comment += f' / **[WAV](https://retro-1000.github.io/taps/{parse.quote(wav_filename)})**'
             imgfilename = f'{filename}.png'
             imgsize = ''
             if not os.path.exists(f'../docs/images/{imgfilename}'):
@@ -285,11 +295,11 @@ if '-html' in sys.argv:
             table_html.append(f'''<tr class="{'odd' if index%2 else 'even'}">
 <td width="100px"><a
 href="{execurl}">{index}. {title}</a></td>
-<td><a href={execurl}><img src="{imgurl}" style="border: 1px solid gray"></a></td>
+<td><a href="{execurl}"><img src="{imgurl}" style="border: 1px solid gray"></a></td>
 <td>{md.markdown(comment)}</td>
 </tr>''')
             index += 1
-        table_html.append('</tr></table>')
+        table_html.append('</table>')
     reports['group'] = '\n'.join(group_html)
     reports['table'] = '\n'.join(table_html)
     import numpy as np 
@@ -319,10 +329,20 @@ else:
             filename = c.파일
             if not os.path.exists(f'../docs/taps/{filename}'):
                 continue
+            tap_path = f'../docs/taps/{filename}'
+            wav_filename = f'{filename}.wav'
+            wav_path = f'../docs/taps/{wav_filename}'
+            if filename.lower().endswith('.tap') and not os.path.exists(wav_path):
+                import subprocess
+                subprocess.run(['/home/msx/spc1000/baremetal/tap2wav', tap_path, wav_path], stdout=subprocess.DEVNULL)
+                if os.path.exists(wav_path) and os.path.getsize(wav_path) >= 50 * 1000 * 1000:
+                    os.remove(wav_path)
             title = c.제목 if type(c.제목) != float else '미분류 파일'
             subcmd = f'&{c.실행}' if type(c.실행) != float else ''
             execurl = f"https://retro-1000.github.io?tape={parse.quote(filename)}{subcmd}"
             comment =  (c.설명.replace('\n',' ').replace('|', ' &#x007c; ') if type(c.설명) != float else '자세한 설명은 생략한다') + f'<br>**[{filename}](https://retro-1000.github.io/taps/{parse.quote(filename)})**'
+            if os.path.exists(wav_path):
+                comment += f' / **[WAV](https://retro-1000.github.io/taps/{parse.quote(wav_filename)})**'
             imgfilename = f'{filename}.png'
             imgsize = ''
             if not os.path.exists(f'../docs/images/{imgfilename}'):
