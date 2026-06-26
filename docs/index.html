@@ -78,6 +78,12 @@
         </div>     
         <script type='text/javascript'>
             var Module = {
+                locateFile: function(path, prefix) {
+                    if (path.endsWith('.wasm')) {
+                        return prefix + path + '?v=3';
+                    }
+                    return prefix + path;
+                },
                 canvas: (function() { return document.getElementById('canvas'); })()
             };
             async function getCanvasBlob(canvas) {
@@ -156,6 +162,7 @@
                 if (!hasTouchSupport() && !show_keyboard) {
                     kcanvas.style.display = 'none';
                     document.getElementById('showkeyboard').style.display = 'block';
+                    canvas.style.width = '640px';
                 } else {
                     var w = 0, h = 0;
                     if (typeof (window.innerWidth) == 'number') { //Chrome
@@ -165,7 +172,7 @@
                     if (h > w * 1.2)
                         canvas.style.width = '100%';
                     else {
-                        canvas.style.width = `${w / h / 1.2 * 100}%`;  
+                        canvas.style.width = `${h / w / 1.2 * 100}%`;  
                     }                
                     // console.log(w, h, canvas.style.width, h > w * 1.5, h * 0.7);
                 }                
@@ -339,16 +346,22 @@
 
             var show_keyboard = false;
             function toggle_keyboard() {
-                show_keyboard = true;
                 if (kcanvas.style.display =='none') {
-                    kcanvas.style.display = 'block'
-                    canvas.style.width = '640px';
+                    show_keyboard = true;
+                    kcanvas.style.display = 'block';
+                    if (!hasTouchSupport()) {
+                        canvas.style.width = '640px';
+                    } else {
+                        changesize();
+                    }
                     document.getElementById('showkeyboard').value = '가상키보드 닫기';    
                 }
                 else
                 {
-                    kcanvas.style.display = 'none'
+                    show_keyboard = false;
+                    kcanvas.style.display = 'none';
                     document.getElementById('showkeyboard').value = '가상키보드';    
+                    changesize();
                 }
             }
             function hasTouchSupport() {
@@ -539,6 +552,7 @@
                 kcanvas.height = window.innerHeight / 4;
                 calculateKeySize();
                 drawKeyboard();
+                changesize();
             }
         
             // 초기 키보드 그리기 및 리사이즈 이벤트 설정
