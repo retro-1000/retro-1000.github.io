@@ -78,6 +78,12 @@
         </div>     
         <script type='text/javascript'>
             var Module = {
+                locateFile: function(path, prefix) {
+                    if (path.endsWith('.wasm')) {
+                        return prefix + path + '?v=3';
+                    }
+                    return prefix + path;
+                },
                 canvas: (function() { return document.getElementById('canvas'); })()
             };
             async function getCanvasBlob(canvas) {
@@ -156,6 +162,7 @@
                 if (!hasTouchSupport() && !show_keyboard) {
                     kcanvas.style.display = 'none';
                     document.getElementById('showkeyboard').style.display = 'block';
+                    canvas.style.width = '640px';
                 } else {
                     var w = 0, h = 0;
                     if (typeof (window.innerWidth) == 'number') { //Chrome
@@ -165,7 +172,7 @@
                     if (h > w * 1.2)
                         canvas.style.width = '100%';
                     else {
-                        canvas.style.width = `${w / h / 1.2 * 100}%`;  
+                        canvas.style.width = `${h / w / 1.2 * 100}%`;  
                     }                
                     // console.log(w, h, canvas.style.width, h > w * 1.5, h * 0.7);
                 }                
@@ -207,18 +214,17 @@
             });
             function cas2tap(data) {
                 const adata = data;
-                const length = adata.byteLength;
-                //console.log(length, adata);
-                let ndata = "";
-                for (i = 0x10; i < length; i++)
+                const length = adata.length;
+                const bitLength = (length > 0x10 ? length - 0x10 : 0) * 8;
+                let ndata = new Uint8Array(bitLength);
+                let idx = 0;
+                for (let i = 0x10; i < length; i++)
                 {
-                    for(j = 0; j < 8; j++)
-                        if (adata[i]&(0x80>>j))
-                            ndata += '1';
-                        else
-                            ndata += '0';
+                    for(let j = 0; j < 8; j++) {
+                        ndata[idx++] = (adata[i] & (0x80 >> j)) ? 49 : 48; // ASCII '1' or '0'
+                    }
                 }
-                return ndata                
+                return ndata;
             }
             function sleep(ms) {
                 const wakeUpTime = Date.now() + ms;
@@ -339,16 +345,22 @@
 
             var show_keyboard = false;
             function toggle_keyboard() {
-                show_keyboard = true;
                 if (kcanvas.style.display =='none') {
-                    kcanvas.style.display = 'block'
-                    canvas.style.width = '640px';
+                    show_keyboard = true;
+                    kcanvas.style.display = 'block';
+                    if (!hasTouchSupport()) {
+                        canvas.style.width = '640px';
+                    } else {
+                        changesize();
+                    }
                     document.getElementById('showkeyboard').value = '가상키보드 닫기';    
                 }
                 else
                 {
-                    kcanvas.style.display = 'none'
+                    show_keyboard = false;
+                    kcanvas.style.display = 'none';
                     document.getElementById('showkeyboard').value = '가상키보드';    
+                    changesize();
                 }
             }
             function hasTouchSupport() {
@@ -539,6 +551,7 @@
                 kcanvas.height = window.innerHeight / 4;
                 calculateKeySize();
                 drawKeyboard();
+                changesize();
             }
         
             // 초기 키보드 그리기 및 리사이즈 이벤트 설정
@@ -618,7 +631,7 @@
                             console.log('404 error')
                             return;
                         }
-                        const data = new Uint8Array(this.response);
+                        let data = new Uint8Array(this.response);
                         title = decodeURIComponent(tape)
                         let ms = data.length/150
                         console.log(data.length, tape, ms)
@@ -655,6 +668,6 @@
                 }
             }
         </script>
-        <script src="index.js"></script>
+        <script src="index.js?v=3"></script>
     </body>
 </html>
